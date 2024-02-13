@@ -1,0 +1,6 @@
+rules:
+  -   types:
+        - TITLE
+      fields:
+        - MAIN_TITLE
+        - SUBTITLE
