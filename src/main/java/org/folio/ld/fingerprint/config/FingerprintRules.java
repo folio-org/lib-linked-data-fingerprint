@@ -35,7 +35,7 @@ public class FingerprintRules {
       .map(ResourceTypeDictionary::getUri)
       .collect(Collectors.toSet());
 
-    Set<String> fields = rule.fields.stream()
+    Set<String> fields = rule.properties.stream()
       .map(PropertyDictionary::valueOf)
       .map(PropertyDictionary::getValue)
       .collect(Collectors.toSet());
@@ -45,6 +45,6 @@ public class FingerprintRules {
 
   public record FingerprintRule(
     Set<String> types,
-    Set<String> fields) {
+    Set<String> properties) {
   }
 }

@@ -1,6 +1,210 @@
 rules:
   -   types:
-        - TITLE
-      fields:
-        - MAIN_TITLE
-        - SUBTITLE
+        - WORK
+      # label, language, creator, contributor, subject
+      properties:
+        - LABEL
+        - LANGUAGE
+      edges:
+        - CREATOR:
+            properties:
+            - LABEL
+        - CONTRIBUTOR:
+            properties:
+              - LABEL
+        - SUBJECT:
+            properties:
+              - LABEL
+  -   types:
+        - INSTANCE
+      # label, isbn, format
+      properties:
+        - LABEL
+      edges:
+        - CREATOR:
+            properties:
+              - LABEL
+        - CONTRIBUTOR:
+            properties:
+              - LABEL
+        - MAP:
+            properties:
+              - NAME
+              - QUALIFIER
+            condition:
+              types:
+                - ID_ISBN
+  -   types:
+        - CATEGORY
+      properties:
+        - TERM
+        - CODE
+        - LINK
+      edges:
+        - IS_DEFINED_BY:
+            properties:
+              - LABEL
+  -   types:
+        - ID_LCCN, IDENTIFIER
+      properties:
+        - NAME
+  -   types:
+        - ID_LOCAL, IDENTIFIER
+      properties:
+        - LOCAL_ID_VALUE
+  -   types:
+        - ID_ISBN, IDENTIFIER
+      properties:
+        - NAME
+        - QUALIFIER
+  -   types:
+        - ID_UNKNOWN, IDENTIFIER
+      properties:
+        - NAME
+        - QUALIFIER
+  -   types:
+        - STATUS
+      properties:
+        - LABEL
+        - LINK
+  -   types:
+        - PLACE
+      properties:
+        - NAME
+  -   types:
+        - PERSON
+      properties:
+        - NAME
+        - NUMERATION # TODO - Update mapping for 100
+        - TITLES
+        - DATE
+  -   types:
+        - FAMILY
+      properties:
+        - NAME
+        - NUMERATION # TODO - Update mapping for 100
+        - TITLES
+        - DATE
+  -   types:
+        - ORGANIZATION
+      properties:
+        - NAME
+        - DATE # TODO - Update mapping for 110
+        - SUBORDINATE_UNIT
+        - AFFILIATION
+  -   types:
+        - MEETING
+      properties:
+        - NAME
+        - DATE # TODO - Update mapping for 111
+        - SUBORDINATE_UNIT
+        - AFFILIATION
+  -   types:
+        - PROVIDER_EVENT
+      properties:
+        - NAME
+        - DATE
+        - SIMPLE_PLACE
+        - PROVIDER_DATE
+      edges:
+        - PROVIDER_PLACE:
+            properties:
+              - CODE
+  -   types:
+        - COPYRIGHT_EVENT
+      properties:
+        - DATE
+  -   types:
+        - CONCEPT, FAMILY
+      properties:
+        - NAME
+        - NUMERATION
+        - TITLES
+        - DATE
+        - FORM_SUBDIVISION
+        - GENERAL_SUBDIVISION
+        - CHRONOLOGICAL_SUBDIVISION
+        - GEOGRAPHIC_SUBDIVISION
+  -   types:
+        - CONCEPT, PERSON
+      properties:
+        - NAME
+        - NUMERATION
+        - TITLES
+        - DATE
+        - FORM_SUBDIVISION
+        - GENERAL_SUBDIVISION
+        - CHRONOLOGICAL_SUBDIVISION
+        - GEOGRAPHIC_SUBDIVISION
+  -   types:
+        - CONCEPT, JURISDICTION
+      properties:
+        - NAME
+        - SUBORDINATE_UNIT
+        - DATE
+        - AFFILIATION
+        - FORM_SUBDIVISION
+        - GENERAL_SUBDIVISION
+        - CHRONOLOGICAL_SUBDIVISION
+        - GEOGRAPHIC_SUBDIVISION
+  -   types:
+        - CONCEPT, ORGANIZATION
+      properties:
+        - NAME
+        - SUBORDINATE_UNIT
+        - DATE
+        - AFFILIATION
+        - FORM_SUBDIVISION
+        - GENERAL_SUBDIVISION
+        - CHRONOLOGICAL_SUBDIVISION
+        - GEOGRAPHIC_SUBDIVISION
+  -   types:
+        - CONCEPT, TOPIC
+      properties:
+        - NAME
+        - GEOGRAPHIC_COVERAGE
+        - LOCATION_OF_EVENT
+        - DATE
+        - FORM_SUBDIVISION
+        - GENERAL_SUBDIVISION
+        - CHRONOLOGICAL_SUBDIVISION
+        - GEOGRAPHIC_SUBDIVISION
+  -   types:
+        - CONCEPT, PLACE
+      properties:
+        - NAME
+        - FORM_SUBDIVISION
+        - GENERAL_SUBDIVISION
+        - CHRONOLOGICAL_SUBDIVISION
+        - GEOGRAPHIC_SUBDIVISION
+  -   types:
+        - CONCEPT, FORM
+      properties:
+        - NAME
+        - FORM_SUBDIVISION
+        - GENERAL_SUBDIVISION
+        - CHRONOLOGICAL_SUBDIVISION
+        - GEOGRAPHIC_SUBDIVISION
+  -   types:
+        - FORM
+      properties:
+        - NAME
+  -   types:
+        - TOPIC
+      properties:
+        - NAME
+        - GEOGRAPHIC_COVERAGE
+        - LOCATION_OF_EVENT
+        - DATE
+        - MISC_INFO
+  -   types:
+        - TEMPORAL
+      properties:
+        - NAME
+  -   types:
+        - JURISDICTION
+      properties:
+        - NAME
+        - DATE
+        - SUBORDINATE_UNIT
+        - AFFILIATION

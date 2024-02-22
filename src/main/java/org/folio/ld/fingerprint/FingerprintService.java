@@ -41,7 +41,7 @@ public class FingerprintService {
       .findFirst();
 
     var fingerprint = matchedRule
-      .map(FingerprintRules.FingerprintRule::fields)
+      .map(FingerprintRules.FingerprintRule::properties)
       .map(fingerprintFields -> getFingerprint(resource, fingerprintFields))
       .orElseGet(() -> getFingerprint(resource)); // Fallback - use all properties for fingerprinting if no rule exists
     return getFingerprintedResource(fingerprint, resource.doc());
