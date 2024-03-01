@@ -1,0 +1,9 @@
+[ {
+  "http://bibfra.me/purl/versa/type" : [ "http://bibfra.me/vocab/lite/Category" ]
+}, {
+  "http://bibfra.me/vocab/marc/code" : [ "code1", "code2" ]
+}, {
+  "http://bibfra.me/vocab/lite/isDefinedBy -> http://bibfra.me/vocab/lite/CategorySet" : [ {
+    "http://bibfra.me/vocab/lite/label" : [ "lc" ]
+  } ]
+} ]

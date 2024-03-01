@@ -1,0 +1,15 @@
+[ {
+  "http://bibfra.me/purl/versa/type" : [ "http://bibfra.me/vocab/lite/ProviderEvent" ]
+}, {
+  "http://bibfra.me/vocab/lite/date" : [ "providerEvent date" ]
+}, {
+  "http://bibfra.me/vocab/lite/name" : [ "providerEvent name" ]
+}, {
+  "http://bibfra.me/vocab/lite/place" : [ "providerEvent simple place" ]
+}, {
+  "http://bibfra.me/vocab/lite/providerDate" : [ "providerEvent provider date" ]
+}, {
+  "http://bibfra.me/vocab/lite/providerPlace -> http://bibfra.me/vocab/lite/Place" : [ {
+    "http://bibfra.me/vocab/marc/code" : [ "providerEvent providerPlace code" ]
+  } ]
+} ]

@@ -1,0 +1,23 @@
+[ {
+  "http://bibfra.me/purl/versa/type" : [ "http://bibfra.me/vocab/lite/Instance" ]
+}, {
+  "http://library.link/vocab/map -> http://bibfra.me/vocab/lite/Identifier,http://library.link/identifier/ISBN" : [ {
+    "http://bibfra.me/vocab/lite/name" : [ "9780143789963" ]
+  }, {
+    "http://bibfra.me/vocab/marc/qualifier" : [ "(paperback)" ]
+  }, {
+    "http://bibfra.me/vocab/marc/status -> http://bibfra.me/vocab/marc/Status" : [ {
+      "http://bibfra.me/vocab/lite/label" : [ "current status value" ]
+    } ]
+  } ]
+}, {
+  "http://library.link/vocab/map -> http://bibfra.me/vocab/lite/Identifier,http://library.link/identifier/ISBN" : [ {
+    "http://bibfra.me/vocab/lite/name" : [ "9999999" ]
+  }, {
+    "http://bibfra.me/vocab/marc/qualifier" : [ "(paperback)" ]
+  }, {
+    "http://bibfra.me/vocab/marc/status -> http://bibfra.me/vocab/marc/Status" : [ {
+      "http://bibfra.me/vocab/lite/label" : [ "canceled or invalid status value" ]
+    } ]
+  } ]
+} ]

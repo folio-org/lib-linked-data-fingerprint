@@ -10,6 +10,7 @@ import org.springframework.core.io.support.PropertySourceFactory;
 public class YamlPropertySourceFactory implements PropertySourceFactory {
 
   @Override
+  @NonNull
   public PropertySource<?> createPropertySource(String name, @NonNull EncodedResource encodedResource) {
     var factory = new YamlPropertiesFactoryBean();
     factory.setResources(encodedResource.getResource());
