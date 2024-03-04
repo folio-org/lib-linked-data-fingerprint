@@ -1,0 +1,224 @@
+rules:
+  - types: WORK
+    label: true
+    properties:
+      - LANGUAGE
+    edges:
+      - predicate: CREATOR
+        types: FAMILY
+        label: true
+      - predicate: CREATOR
+        types: MEETING
+        label: true
+      - predicate: CREATOR
+        types: ORGANIZATION
+        label: true
+      - predicate: CREATOR
+        types: PERSON
+        label: true
+      - predicate: CONTRIBUTOR
+        types: FAMILY
+        label: true
+      - predicate: CONTRIBUTOR
+        types: MEETING
+        label: true
+      - predicate: CONTRIBUTOR
+        types: ORGANIZATION
+        label: true
+      - predicate: CONTRIBUTOR
+        types: PERSON
+        label: true
+      - predicate: SUBJECT
+        label: true
+  - types: INSTANCE
+    label: true
+    edges:
+      - predicate: CREATOR
+        types: FAMILY
+        label: true
+      - predicate: CREATOR
+        types: MEETING
+        label: true
+      - predicate: CREATOR
+        types: ORGANIZATION
+        label: true
+      - predicate: CREATOR
+        types: PERSON
+        label: true
+      - predicate: CONTRIBUTOR
+        types: FAMILY
+        label: true
+      - predicate: CONTRIBUTOR
+        types: MEETING
+        label: true
+      - predicate: CONTRIBUTOR
+        types: ORGANIZATION
+        label: true
+      - predicate: CONTRIBUTOR
+        types: PERSON
+        label: true
+      - predicate: MAP
+        types: ID_ISBN, IDENTIFIER
+        edgeProperties:
+          NAME: http://bibfra.me/vocab/marc/isbn
+      - predicate: MAP
+        types: ID_LCCN, IDENTIFIER
+        edgeProperties:
+          NAME: http://bibfra.me/vocab/marc/lccn
+      - predicate: TITLE
+        types: TITLE
+        edgeProperties:
+          MAIN_TITLE: http://bibfra.me/vocab/marc/mainHeading
+  - types: CATEGORY
+    properties:
+      - TERM
+      - CODE
+      - LINK
+    edges:
+      - predicate: IS_DEFINED_BY
+        label: true
+  - types: ID_LCCN, IDENTIFIER
+    properties:
+      - NAME
+  - types: ID_LOCAL, IDENTIFIER
+    properties:
+      - LOCAL_ID_VALUE
+  - types: ID_ISBN, IDENTIFIER
+    properties:
+      - NAME
+      - QUALIFIER
+  - types: ID_EAN, IDENTIFIER
+    properties:
+      - EAN_VALUE
+      - QUALIFIER
+  - types: ID_UNKNOWN, IDENTIFIER
+    properties:
+      - NAME
+      - QUALIFIER
+  - types: STATUS
+    properties:
+      - LABEL
+      - LINK
+  - types: PLACE
+    properties:
+      - NAME
+  - types: PERSON
+    properties:
+      - NAME
+      - NUMERATION
+      - TITLES
+      - DATE
+  - types: FAMILY
+    properties:
+      - NAME
+      - NUMERATION
+      - TITLES
+      - DATE
+  - types: ORGANIZATION
+    properties:
+      - NAME
+      - DATE
+      - SUBORDINATE_UNIT
+      - AFFILIATION
+  - types: MEETING
+    properties:
+      - NAME
+      - DATE
+      - SUBORDINATE_UNIT
+      - AFFILIATION
+  - types: PROVIDER_EVENT
+    properties:
+      - NAME
+      - DATE
+      - SIMPLE_PLACE
+      - PROVIDER_DATE
+    edges:
+      - predicate: PROVIDER_PLACE
+        edgeProperties:
+          CODE: http://bibfra.me/vocab/relation/provider_place
+  - types: COPYRIGHT_EVENT
+    properties:
+      - DATE
+  - types: CONCEPT, FAMILY
+    properties:
+      - NAME
+      - NUMERATION
+      - TITLES
+      - DATE
+      - FORM_SUBDIVISION
+      - GENERAL_SUBDIVISION
+      - CHRONOLOGICAL_SUBDIVISION
+      - GEOGRAPHIC_SUBDIVISION
+  - types: CONCEPT, PERSON
+    properties:
+      - NAME
+      - NUMERATION
+      - TITLES
+      - DATE
+      - FORM_SUBDIVISION
+      - GENERAL_SUBDIVISION
+      - CHRONOLOGICAL_SUBDIVISION
+      - GEOGRAPHIC_SUBDIVISION
+  - types: CONCEPT, JURISDICTION
+    properties:
+      - NAME
+      - SUBORDINATE_UNIT
+      - DATE
+      - AFFILIATION
+      - FORM_SUBDIVISION
+      - GENERAL_SUBDIVISION
+      - CHRONOLOGICAL_SUBDIVISION
+      - GEOGRAPHIC_SUBDIVISION
+  - types: CONCEPT, ORGANIZATION
+    properties:
+      - NAME
+      - SUBORDINATE_UNIT
+      - DATE
+      - AFFILIATION
+      - FORM_SUBDIVISION
+      - GENERAL_SUBDIVISION
+      - CHRONOLOGICAL_SUBDIVISION
+      - GEOGRAPHIC_SUBDIVISION
+  - types: CONCEPT, TOPIC
+    properties:
+      - NAME
+      - GEOGRAPHIC_COVERAGE
+      - LOCATION_OF_EVENT
+      - DATE
+      - FORM_SUBDIVISION
+      - GENERAL_SUBDIVISION
+      - CHRONOLOGICAL_SUBDIVISION
+      - GEOGRAPHIC_SUBDIVISION
+  - types: CONCEPT, PLACE
+    properties:
+      - NAME
+      - FORM_SUBDIVISION
+      - GENERAL_SUBDIVISION
+      - CHRONOLOGICAL_SUBDIVISION
+      - GEOGRAPHIC_SUBDIVISION
+  - types: CONCEPT, FORM
+    properties:
+      - NAME
+      - FORM_SUBDIVISION
+      - GENERAL_SUBDIVISION
+      - CHRONOLOGICAL_SUBDIVISION
+      - GEOGRAPHIC_SUBDIVISION
+  - types: FORM
+    properties:
+      - NAME
+  - types: TOPIC
+    properties:
+      - NAME
+      - GEOGRAPHIC_COVERAGE
+      - LOCATION_OF_EVENT
+      - DATE
+      - MISC_INFO
+  - types: TEMPORAL
+    properties:
+      - NAME
+  - types: JURISDICTION
+    properties:
+      - NAME
+      - DATE
+      - SUBORDINATE_UNIT
+      - AFFILIATION
