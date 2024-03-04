@@ -59,12 +59,16 @@ rules:
         label: true
       - predicate: MAP
         types: ID_ISBN, IDENTIFIER
-        properties:
-          - NAME
-          - QUALIFIER
-        edges:
-          - types: STATUS
-            properties: LABEL
+        edgeProperties:
+          NAME: http://bibfra.me/vocab/marc/isbn
+      - predicate: MAP
+        types: ID_LCCN, IDENTIFIER
+        edgeProperties:
+          NAME: http://bibfra.me/vocab/marc/lccn
+      - predicate: MAP
+        types: INSTANCE_TITLE
+        edgeProperties:
+          MAIN_TITLE: http://bibfra.me/vocab/marc/mainHeading
   - types: CATEGORY
     properties:
       - TERM
@@ -76,36 +80,21 @@ rules:
   - types: ID_LCCN, IDENTIFIER
     properties:
       - NAME
-    edges:
-      - types: STATUS
-        properties: LABEL
   - types: ID_LOCAL, IDENTIFIER
     properties:
       - LOCAL_ID_VALUE
-    edges:
-      - types: STATUS
-        properties: LABEL
   - types: ID_ISBN, IDENTIFIER
     properties:
       - NAME
       - QUALIFIER
-    edges:
-      - types: STATUS
-        properties: LABEL
   - types: ID_EAN, IDENTIFIER
     properties:
       - EAN_VALUE
       - QUALIFIER
-    edges:
-      - types: STATUS
-        properties: LABEL
   - types: ID_UNKNOWN, IDENTIFIER
     properties:
       - NAME
       - QUALIFIER
-    edges:
-      - types: STATUS
-        properties: LABEL
   - types: STATUS
     properties:
       - LABEL
@@ -145,8 +134,8 @@ rules:
       - PROVIDER_DATE
     edges:
       - predicate: PROVIDER_PLACE
-        properties:
-          - CODE
+        edgeProperties:
+          CODE: http://bibfra.me/vocab/relation/provider_place
   - types: COPYRIGHT_EVENT
     properties:
       - DATE

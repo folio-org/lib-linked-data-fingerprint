@@ -1,6 +1,7 @@
 package org.folio.ld.fingerprint.config;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -15,11 +16,10 @@ public class FingerprintRules {
 
   private List<FingerprintRule> rules;
 
-  public record FingerprintRule(Set<String> types,
-                                boolean label,
-                                Set<String> properties,
-                                String predicate,
-                                Set<FingerprintRule> edges) {
+  public record FingerprintRule(Set<String> types, boolean label, Set<String> properties, Set<EdgeRule> edges) {
+  }
+
+  public record EdgeRule(Set<String> types, String predicate, boolean label, Map<String, String> edgeProperties) {
   }
 
 }

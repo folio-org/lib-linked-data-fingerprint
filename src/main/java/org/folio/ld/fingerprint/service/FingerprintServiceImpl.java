@@ -3,8 +3,8 @@ package org.folio.ld.fingerprint.service;
 import static java.util.Comparator.comparing;
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
+import static java.util.Optional.ofNullable;
 import static org.folio.ld.dictionary.PropertyDictionary.LABEL;
-import static org.folio.ld.fingerprint.config.FingerprintRules.FingerprintRule;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -17,7 +17,9 @@ import lombok.extern.log4j.Log4j2;
 import org.folio.ld.dictionary.PropertyDictionary;
 import org.folio.ld.dictionary.ResourceTypeDictionary;
 import org.folio.ld.dictionary.model.Resource;
+import org.folio.ld.dictionary.model.ResourceEdge;
 import org.folio.ld.fingerprint.config.FingerprintRules;
+import org.folio.ld.fingerprint.config.FingerprintRules.FingerprintRule;
 import org.springframework.stereotype.Service;
 
 @Log4j2
@@ -44,7 +46,7 @@ public class FingerprintServiceImpl implements FingerprintService {
         resource.getTypes());
     }
     var fingerprint = new ArrayList<>(collectTypes(resource));
-    collectLabel(resource, rule).ifPresent(fingerprint::add);
+    ofNullable(rule).flatMap(r -> collectLabel(resource, r.label())).ifPresent(fingerprint::add);
     fingerprint.addAll(collectProperties(resource, rule));
     fingerprint.addAll(collectEdges(resource, rule));
     return fingerprint;
@@ -56,8 +58,8 @@ public class FingerprintServiceImpl implements FingerprintService {
       .toList();
   }
 
-  private Optional<List<String>> collectLabel(Resource resource, FingerprintRule rule) {
-    if (nonNull(rule) && rule.label() && nonNull(resource.getLabel())) {
+  private Optional<List<String>> collectLabel(Resource resource, boolean includeLabel) {
+    if (includeLabel && nonNull(resource.getLabel())) {
       return Optional.of(List.of(LABEL.getValue(), resource.getLabel()));
     } else {
       return Optional.empty();
@@ -79,7 +81,47 @@ public class FingerprintServiceImpl implements FingerprintService {
   }
 
   private List<List<String>> collectEdges(Resource resource, FingerprintRule rule) {
-    return new ArrayList<>();
+    var edgesFp = new ArrayList<List<String>>();
+    if (nonNull(rule) && nonNull(rule.edges())) {
+      ofNullable(resource.getOutgoingEdges())
+        .ifPresent(edges -> edges.forEach(
+          oe -> rule.edges().stream()
+            .filter(r -> filterEdgeRule(oe, r))
+            .findFirst()
+            .ifPresent(edgeRule -> edgesFp.addAll(getEdgeFingerprint(oe.getTarget(), edgeRule))))
+        );
+    }
+    return edgesFp;
+  }
+
+  private List<List<String>> getEdgeFingerprint(Resource resource, FingerprintRules.EdgeRule edgeRule) {
+    var fingerprint = new ArrayList<List<String>>();
+    collectLabel(resource, edgeRule.label()).ifPresent(fingerprint::add);
+    fingerprint.addAll(collectEdgeProperties(resource, edgeRule));
+    return fingerprint;
+  }
+
+  private List<List<String>> collectEdgeProperties(Resource resource, FingerprintRules.EdgeRule rule) {
+    var propertiesFp = new ArrayList<List<String>>();
+    if (isNull(rule.edgeProperties())) {
+      return propertiesFp;
+    }
+    mapper.convertValue(resource.getDoc(), new TypeReference<Map<String, List<String>>>() {
+      }).entrySet().stream()
+      .flatMap(e -> PropertyDictionary.fromValue(e.getKey())
+        .map(Enum::name)
+        .filter(rule.edgeProperties()::containsKey)
+        .stream()
+        .flatMap(p -> e.getValue().stream().map(v -> List.of(rule.edgeProperties().get(p), v)).toList().stream())
+      )
+      .sorted(comparing((List<String> strings) -> strings.get(0)).thenComparing(strings -> strings.get(1)))
+      .forEach(propertiesFp::add);
+    return propertiesFp;
+  }
+
+  private boolean filterEdgeRule(ResourceEdge oe, FingerprintRules.EdgeRule edgeRule) {
+    return (isNull(edgeRule.types()) || edgeRule.types().equals(oe.getTarget().getTypeNames()))
+      && (isNull(edgeRule.predicate()) || edgeRule.predicate().equals(oe.getPredicate().name()));
   }
 
 }
