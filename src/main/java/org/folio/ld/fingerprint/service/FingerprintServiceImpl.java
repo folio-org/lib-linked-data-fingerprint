@@ -94,6 +94,11 @@ public class FingerprintServiceImpl implements FingerprintService {
     return edgesFp;
   }
 
+  private boolean filterEdgeRule(ResourceEdge oe, FingerprintRules.EdgeRule edgeRule) {
+    return (isNull(edgeRule.types()) || edgeRule.types().equals(oe.getTarget().getTypeNames()))
+      && (isNull(edgeRule.predicate()) || edgeRule.predicate().equals(oe.getPredicate().name()));
+  }
+
   private List<List<String>> getEdgeFingerprint(Resource resource, FingerprintRules.EdgeRule edgeRule) {
     var fingerprint = new ArrayList<List<String>>();
     collectLabel(resource, edgeRule.label()).ifPresent(fingerprint::add);
@@ -114,14 +119,9 @@ public class FingerprintServiceImpl implements FingerprintService {
         .stream()
         .flatMap(p -> e.getValue().stream().map(v -> List.of(rule.edgeProperties().get(p), v)).toList().stream())
       )
-      .sorted(comparing((List<String> strings) -> strings.get(0)).thenComparing(strings -> strings.get(1)))
+      .sorted(comparing((List<String> pair) -> pair.get(0)).thenComparing(pair -> pair.get(1)))
       .forEach(propertiesFp::add);
     return propertiesFp;
-  }
-
-  private boolean filterEdgeRule(ResourceEdge oe, FingerprintRules.EdgeRule edgeRule) {
-    return (isNull(edgeRule.types()) || edgeRule.types().equals(oe.getTarget().getTypeNames()))
-      && (isNull(edgeRule.predicate()) || edgeRule.predicate().equals(oe.getPredicate().name()));
   }
 
 }

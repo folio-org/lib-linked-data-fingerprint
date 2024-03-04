@@ -65,8 +65,8 @@ rules:
         types: ID_LCCN, IDENTIFIER
         edgeProperties:
           NAME: http://bibfra.me/vocab/marc/lccn
-      - predicate: MAP
-        types: INSTANCE_TITLE
+      - predicate: TITLE
+        types: TITLE
         edgeProperties:
           MAIN_TITLE: http://bibfra.me/vocab/marc/mainHeading
   - types: CATEGORY
