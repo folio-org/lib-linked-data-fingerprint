@@ -399,7 +399,7 @@ public class TestUtil {
       pred2OutgoingResources)
       .setInventoryId(UUID.fromString("2165ef4b-001f-46b3-a60e-52bcdeb3d5a1"))
       .setSrsId(UUID.fromString("43d58061-decf-4d74-9747-0e1c368e861b"));
-    return instance;
+    return instance.setLabel("Instance label");
   }
 
   public static Resource work() {

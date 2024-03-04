@@ -1,9 +1,1 @@
-[ {
-  "http://bibfra.me/purl/versa/type" : [ "http://bibfra.me/vocab/lite/Identifier", "http://library.link/identifier/LCCN" ]
-}, {
-  "http://bibfra.me/vocab/lite/name" : [ "lccn value" ]
-}, {
-  "http://bibfra.me/vocab/marc/status -> http://bibfra.me/vocab/marc/Status" : [ {
-    "http://bibfra.me/vocab/lite/label" : [ "lccn status value" ]
-  } ]
-} ]
+[["http://bibfra.me/purl/versa/type","http://bibfra.me/vocab/lite/Identifier"],["http://bibfra.me/purl/versa/type","http://library.link/identifier/LCCN"],["http://bibfra.me/vocab/lite/name","lccn value"]]
