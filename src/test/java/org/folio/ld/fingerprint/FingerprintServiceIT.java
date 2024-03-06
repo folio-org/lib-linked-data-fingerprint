@@ -8,6 +8,7 @@ import static org.folio.ld.fingerprint.test.TestUtil.instanceTitle;
 import static org.folio.ld.fingerprint.test.TestUtil.lcClassification;
 import static org.folio.ld.fingerprint.test.TestUtil.loadResourceAsString;
 import static org.folio.ld.fingerprint.test.TestUtil.providerEvent;
+import static org.folio.ld.fingerprint.test.TestUtil.providerPlace;
 import static org.folio.ld.fingerprint.test.TestUtil.status;
 import static org.folio.ld.fingerprint.test.TestUtil.work;
 
@@ -36,6 +37,7 @@ class FingerprintServiceIT {
       Arguments.of(instanceTitle(), "instanceTitle.json"),
       Arguments.of(lcClassification(), "lcClassification.json"),
       Arguments.of(providerEvent("providerEvent"), "providerEvent.json"),
+      Arguments.of(providerPlace("providerEvent"), "providerPlace.json"),
       Arguments.of(status("some"), "status.json"),
       Arguments.of(work(), "work.json")
     );

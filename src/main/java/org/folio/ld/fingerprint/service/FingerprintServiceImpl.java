@@ -68,6 +68,9 @@ public class FingerprintServiceImpl implements FingerprintService {
 
   private List<List<String>> collectProperties(Resource resource, FingerprintRule rule) {
     var propertiesFp = new ArrayList<List<String>>();
+    if (isNull(resource.getDoc())) {
+      return propertiesFp;
+    }
     mapper.convertValue(resource.getDoc(), new TypeReference<Map<String, List<String>>>() {
       }).entrySet().stream()
       .filter(e -> isNull(rule) || nonNull(rule.properties()) && PropertyDictionary.fromValue(e.getKey())
@@ -108,7 +111,7 @@ public class FingerprintServiceImpl implements FingerprintService {
 
   private List<List<String>> collectEdgeProperties(Resource resource, FingerprintRules.EdgeRule rule) {
     var propertiesFp = new ArrayList<List<String>>();
-    if (isNull(rule.edgeProperties())) {
+    if (isNull(rule.edgeProperties()) || isNull(resource.getDoc())) {
       return propertiesFp;
     }
     mapper.convertValue(resource.getDoc(), new TypeReference<Map<String, List<String>>>() {

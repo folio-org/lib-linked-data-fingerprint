@@ -101,6 +101,7 @@ rules:
       - LINK
   - types: PLACE
     properties:
+      - CODE
       - NAME
   - types: PERSON
     properties:
