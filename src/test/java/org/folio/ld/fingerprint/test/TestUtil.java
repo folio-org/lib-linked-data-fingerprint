@@ -156,13 +156,13 @@ import org.folio.ld.dictionary.PropertyDictionary;
 import org.folio.ld.dictionary.ResourceTypeDictionary;
 import org.folio.ld.dictionary.model.Resource;
 import org.folio.ld.dictionary.model.ResourceEdge;
-import org.folio.ld.fingerprint.config.ObjectMapperBackupConfig;
+import org.folio.ld.fingerprint.config.FingerprintObjectMapperBackupConfig;
 import org.springframework.core.io.ResourceLoader;
 
 @UtilityClass
 public class TestUtil {
 
-  public static final ObjectMapper OBJECT_MAPPER = new ObjectMapperBackupConfig().objectMapper();
+  public static final ObjectMapper OBJECT_MAPPER = new FingerprintObjectMapperBackupConfig().objectMapper();
 
   @SneakyThrows
   public static String loadResourceAsString(String resourceName) {
