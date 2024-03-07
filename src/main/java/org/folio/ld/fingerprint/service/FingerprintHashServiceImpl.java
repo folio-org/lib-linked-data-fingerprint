@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class HashServiceImpl implements HashService {
+public class FingerprintHashServiceImpl implements FingerprintHashService {
 
   private final FingerprintService fingerprintService;
 
