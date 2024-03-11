@@ -32,7 +32,7 @@
     <guava.version>33.0.0-jre</guava.version>
     <commons-io.version>2.15.1</commons-io.version>
     <lib-linked-data-dictionary.version>1.0.0-SNAPSHOT</lib-linked-data-dictionary.version>
-    <checkstyle.version>10.14.0</checkstyle.version>
+    <checkstyle.version>10.14.1</checkstyle.version>
 
     <versions-maven-plugin.version>2.16.2</versions-maven-plugin.version>
     <maven-source-plugin.version>3.3.0</maven-source-plugin.version>
