@@ -29,7 +29,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-    <guava.version>33.0.0-jre</guava.version>
+    <guava.version>33.1.0-jre</guava.version>
     <commons-io.version>2.15.1</commons-io.version>
     <lib-linked-data-dictionary.version>1.0.0-SNAPSHOT</lib-linked-data-dictionary.version>
     <checkstyle.version>10.14.1</checkstyle.version>
