@@ -204,6 +204,16 @@ rules:
       - GENERAL_SUBDIVISION
       - CHRONOLOGICAL_SUBDIVISION
       - GEOGRAPHIC_SUBDIVISION
+  - types: CONCEPT, MEETING
+    properties:
+      - NAME
+      - SUBORDINATE_UNIT
+      - DATE
+      - AFFILIATION
+      - FORM_SUBDIVISION
+      - GENERAL_SUBDIVISION
+      - CHRONOLOGICAL_SUBDIVISION
+      - GEOGRAPHIC_SUBDIVISION
   - types: FORM
     properties:
       - NAME
@@ -223,3 +233,31 @@ rules:
       - DATE
       - SUBORDINATE_UNIT
       - AFFILIATION
+  - types: CATEGORY_SET
+    label: true
+    properties:
+      - LINK
+  - types: TITLE
+    properties:
+      - MAIN_TITLE
+      - NON_SORT_NUM
+      - SUBTITLE
+      - PART_NUMBER
+      - PART_NAME
+  - types: PARALLEL_TITLE
+    properties:
+      - MAIN_TITLE
+      - SUBTITLE
+      - DATE
+      - NOTE
+      - PART_NUMBER
+      - PART_NAME
+  - types: VARIANT_TITLE
+    properties:
+      - MAIN_TITLE
+      - SUBTITLE
+      - DATE
+      - NOTE
+      - PART_NUMBER
+      - PART_NAME
+      - VARIANT_TYPE

@@ -188,33 +188,6 @@ public class TestUtil {
       emptyMap()
     ).setLabel("Instance Title empty label");
 
-    var parallelTitle = getResource(
-      Map.of(
-        PART_NAME, List.of("Parallel-PartName"),
-        PART_NUMBER, List.of("6"),
-        MAIN_TITLE, List.of("Parallel-MainTitle"),
-        DATE, List.of("2023-01-01"),
-        SUBTITLE, List.of("Parallel-SubTitle"),
-        NOTE, List.of("Parallel-Note")
-      ),
-      Set.of(PARALLEL_TITLE),
-      emptyMap()
-    ).setLabel("Parallel-MainTitle");
-
-    var variantTitle = getResource(
-      Map.of(
-        PART_NAME, List.of("Variant-PartName"),
-        PART_NUMBER, List.of("5"),
-        MAIN_TITLE, List.of("Variant-MainTitle"),
-        DATE, List.of("2023-02-02"),
-        SUBTITLE, List.of("Variant-SubTitle"),
-        VARIANT_TYPE, List.of("9"),
-        NOTE, List.of("Variant-Note")
-      ),
-      Set.of(VARIANT_TITLE),
-      emptyMap()
-    ).setLabel("Variant-MainTitle");
-
     var production = providerEvent("Production");
     var publication = providerEvent("Publication");
     var distribution = providerEvent("Distribution");
@@ -335,7 +308,7 @@ public class TestUtil {
 
     var pred2OutgoingResources = new LinkedHashMap<PredicateDictionary, List<Resource>>();
     pred2OutgoingResources.put(TITLE,
-      List.of(instanceTitle(), parallelTitle, variantTitle, instanceTitle2, instanceTitle3));
+      List.of(instanceTitle(), parallelTitle(), variantTitle(), instanceTitle2, instanceTitle3));
     pred2OutgoingResources.put(PE_PRODUCTION, List.of(production));
     pred2OutgoingResources.put(PE_PUBLICATION, List.of(publication));
     pred2OutgoingResources.put(PE_DISTRIBUTION, List.of(distribution));
@@ -752,6 +725,54 @@ public class TestUtil {
     ).setLabel("Instance: mainTitle");
   }
 
+  public static Resource parallelTitle() {
+    return getResource(
+      Map.of(
+        PART_NAME, List.of("Parallel-PartName"),
+        PART_NUMBER, List.of("6"),
+        MAIN_TITLE, List.of("Parallel-MainTitle"),
+        DATE, List.of("2023-01-01"),
+        SUBTITLE, List.of("Parallel-SubTitle"),
+        NOTE, List.of("Parallel-Note")
+      ),
+      Set.of(PARALLEL_TITLE),
+      emptyMap()
+    ).setLabel("Parallel-MainTitle");
+  }
+
+  public static Resource variantTitle() {
+    return getResource(
+      Map.of(
+        PART_NAME, List.of("Variant-PartName"),
+        PART_NUMBER, List.of("5"),
+        MAIN_TITLE, List.of("Variant-MainTitle"),
+        DATE, List.of("2023-02-02"),
+        SUBTITLE, List.of("Variant-SubTitle"),
+        VARIANT_TYPE, List.of("9"),
+        NOTE, List.of("Variant-Note")
+      ),
+      Set.of(VARIANT_TITLE),
+      emptyMap()
+    ).setLabel("Variant-MainTitle");
+  }
+
+  public static Resource meetingConcept() {
+    return getResource(
+      Map.of(
+        NAME, List.of("Meeting Concept name"),
+        SUBORDINATE_UNIT, List.of("Meeting Concept subordinate unit"),
+        DATE, List.of("Meeting Concept date"),
+        AFFILIATION, List.of("Meeting Concept affiliation"),
+        FORM_SUBDIVISION, List.of("Meeting Concept form subdivision"),
+        GENERAL_SUBDIVISION, List.of("Meeting Concept general subdivision"),
+        CHRONOLOGICAL_SUBDIVISION, List.of("Meeting Concept chronological subdivision"),
+        GEOGRAPHIC_SUBDIVISION, List.of("Meeting Concept geographic subdivision")
+      ),
+      Set.of(CONCEPT, MEETING),
+      emptyMap()
+    ).setLabel("local value");
+  }
+
   public static Resource id_lccn() {
     return getResource(
       Map.of(NAME, List.of("lccn value")),
@@ -807,6 +828,17 @@ public class TestUtil {
       Set.of(CATEGORY),
       emptyMap()
     ).setLabel(prefix + " term");
+  }
+
+  public static Resource categorySet() {
+    return getResource(
+      Map.of(
+        LABEL, List.of("categorySet label"),
+        LINK, List.of("categorySet link")
+      ),
+      Set.of(CATEGORY_SET),
+      emptyMap()
+    ).setLabel("categorySet label");
   }
 
   public static Resource getResource(Map<PropertyDictionary, List<String>> propertiesDic,

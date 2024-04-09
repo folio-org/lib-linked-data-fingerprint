@@ -2,14 +2,18 @@ package org.folio.ld.fingerprint;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.folio.ld.fingerprint.test.TestUtil.category;
+import static org.folio.ld.fingerprint.test.TestUtil.categorySet;
 import static org.folio.ld.fingerprint.test.TestUtil.id_lccn;
 import static org.folio.ld.fingerprint.test.TestUtil.instance;
 import static org.folio.ld.fingerprint.test.TestUtil.instanceTitle;
 import static org.folio.ld.fingerprint.test.TestUtil.lcClassification;
 import static org.folio.ld.fingerprint.test.TestUtil.loadResourceAsString;
+import static org.folio.ld.fingerprint.test.TestUtil.meetingConcept;
+import static org.folio.ld.fingerprint.test.TestUtil.parallelTitle;
 import static org.folio.ld.fingerprint.test.TestUtil.providerEvent;
 import static org.folio.ld.fingerprint.test.TestUtil.providerPlace;
 import static org.folio.ld.fingerprint.test.TestUtil.status;
+import static org.folio.ld.fingerprint.test.TestUtil.variantTitle;
 import static org.folio.ld.fingerprint.test.TestUtil.work;
 
 import java.util.stream.Stream;
@@ -32,9 +36,13 @@ class FingerprintServiceIT {
   private static Stream<Arguments> provideResourceAndExpectedFingerprint() {
     return Stream.of(
       Arguments.of(category("category"), "category.json"),
+      Arguments.of(categorySet(), "categorySet.json"),
+      Arguments.of(meetingConcept(), "meetingConcept.json"),
       Arguments.of(id_lccn(), "id_lccn.json"),
       Arguments.of(instance(), "instance.json"),
       Arguments.of(instanceTitle(), "instanceTitle.json"),
+      Arguments.of(parallelTitle(), "parallelTitle.json"),
+      Arguments.of(variantTitle(), "variantTitle.json"),
       Arguments.of(lcClassification(), "lcClassification.json"),
       Arguments.of(providerEvent("providerEvent"), "providerEvent.json"),
       Arguments.of(providerPlace("providerEvent"), "providerPlace.json"),
