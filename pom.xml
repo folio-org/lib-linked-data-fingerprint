@@ -6,7 +6,7 @@
 
   <groupId>org.folio</groupId>
   <artifactId>lib-linked-data-fingerprint</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.0-alpha</version>
 
   <parent>
     <groupId>org.springframework.boot</groupId>
@@ -30,7 +30,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
     <commons-io.version>2.16.1</commons-io.version>
-    <lib-linked-data-dictionary.version>1.0.0-SNAPSHOT</lib-linked-data-dictionary.version>
+    <lib-linked-data-dictionary.version>1.0.0-alpha</lib-linked-data-dictionary.version>
     <checkstyle.version>10.15.0</checkstyle.version>
 
     <versions-maven-plugin.version>2.16.2</versions-maven-plugin.version>
