@@ -80,6 +80,9 @@ rules:
   - types: ID_LCCN, IDENTIFIER
     properties:
       - NAME
+    edges:
+      - predicate: STATUS
+        label: true
   - types: ID_LOCAL, IDENTIFIER
     properties:
       - LOCAL_ID_VALUE
@@ -87,6 +90,9 @@ rules:
     properties:
       - NAME
       - QUALIFIER
+    edges:
+      - predicate: STATUS
+        label: true
   - types: ID_EAN, IDENTIFIER
     properties:
       - EAN_VALUE

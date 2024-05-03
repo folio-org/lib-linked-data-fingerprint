@@ -781,6 +781,14 @@ public class TestUtil {
     ).setLabel("lccn value");
   }
 
+  public static Resource id_isbn() {
+    return getResource(
+      Map.of(NAME, List.of("isbn value")),
+      Set.of(IDENTIFIER, ID_ISBN),
+      Map.of(STATUS, List.of(status("isbn")))
+    ).setLabel("isbn value");
+  }
+
   public static Resource status(String prefix) {
     return getResource(
       Map.of(
