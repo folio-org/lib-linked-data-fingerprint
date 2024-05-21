@@ -94,7 +94,6 @@ import static org.folio.ld.dictionary.PropertyDictionary.RELATED_PARTS;
 import static org.folio.ld.dictionary.PropertyDictionary.RELATOR_CODE;
 import static org.folio.ld.dictionary.PropertyDictionary.RELATOR_TERM;
 import static org.folio.ld.dictionary.PropertyDictionary.REPRODUCTION_NOTE;
-import static org.folio.ld.dictionary.PropertyDictionary.RESPONSIBILITY_STATEMENT;
 import static org.folio.ld.dictionary.PropertyDictionary.SIMPLE_PLACE;
 import static org.folio.ld.dictionary.PropertyDictionary.SOURCE;
 import static org.folio.ld.dictionary.PropertyDictionary.SUBORDINATE_UNIT;
@@ -510,7 +509,6 @@ public class TestUtil {
         LANGUAGE, List.of("eng"),
         SUMMARY, List.of("work summary"),
         TABLE_OF_CONTENTS, List.of("work table of contents"),
-        RESPONSIBILITY_STATEMENT, List.of("Statement Of Responsibility"),
         DATE_START, List.of("2023"),
         DATE_END, List.of("2024")
       ),
