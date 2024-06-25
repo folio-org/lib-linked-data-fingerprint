@@ -12,6 +12,7 @@ import static org.folio.ld.dictionary.PredicateDictionary.CREATOR;
 import static org.folio.ld.dictionary.PredicateDictionary.FOCUS;
 import static org.folio.ld.dictionary.PredicateDictionary.GENRE;
 import static org.folio.ld.dictionary.PredicateDictionary.GOVERNMENT_PUBLICATION;
+import static org.folio.ld.dictionary.PredicateDictionary.GRANTING_INSTITUTION;
 import static org.folio.ld.dictionary.PredicateDictionary.INSTANTIATES;
 import static org.folio.ld.dictionary.PredicateDictionary.IS_DEFINED_BY;
 import static org.folio.ld.dictionary.PredicateDictionary.MAP;
@@ -41,8 +42,12 @@ import static org.folio.ld.dictionary.PropertyDictionary.DATE;
 import static org.folio.ld.dictionary.PropertyDictionary.DATES_OF_PUBLICATION_NOTE;
 import static org.folio.ld.dictionary.PropertyDictionary.DATE_END;
 import static org.folio.ld.dictionary.PropertyDictionary.DATE_START;
+import static org.folio.ld.dictionary.PropertyDictionary.DEGREE;
 import static org.folio.ld.dictionary.PropertyDictionary.DESCRIPTION_SOURCE_NOTE;
 import static org.folio.ld.dictionary.PropertyDictionary.DIMENSIONS;
+import static org.folio.ld.dictionary.PropertyDictionary.DISSERTATION_ID;
+import static org.folio.ld.dictionary.PropertyDictionary.DISSERTATION_NOTE;
+import static org.folio.ld.dictionary.PropertyDictionary.DISSERTATION_YEAR;
 import static org.folio.ld.dictionary.PropertyDictionary.EAN_VALUE;
 import static org.folio.ld.dictionary.PropertyDictionary.EDITION_STATEMENT;
 import static org.folio.ld.dictionary.PropertyDictionary.ENTITY_AND_ATTRIBUTE_INFORMATION;
@@ -113,6 +118,7 @@ import static org.folio.ld.dictionary.ResourceTypeDictionary.CATEGORY;
 import static org.folio.ld.dictionary.ResourceTypeDictionary.CATEGORY_SET;
 import static org.folio.ld.dictionary.ResourceTypeDictionary.CONCEPT;
 import static org.folio.ld.dictionary.ResourceTypeDictionary.COPYRIGHT_EVENT;
+import static org.folio.ld.dictionary.ResourceTypeDictionary.DISSERTATION;
 import static org.folio.ld.dictionary.ResourceTypeDictionary.FAMILY;
 import static org.folio.ld.dictionary.ResourceTypeDictionary.FORM;
 import static org.folio.ld.dictionary.ResourceTypeDictionary.IDENTIFIER;
@@ -432,14 +438,7 @@ public class TestUtil {
       emptyMap()
     ).setLabel("CREATOR FAMILY name");
 
-    var organizationCreator = getResource(
-      Map.of(
-        NAME, List.of("CREATOR ORGANIZATION name"),
-        LCNAF_ID, List.of("CREATOR ORGANIZATION LCNAF id")
-      ),
-      Set.of(ORGANIZATION),
-      emptyMap()
-    ).setLabel("CREATOR ORGANIZATION name");
+    var organizationCreator = organization("CREATOR ORGANIZATION name");
 
     var meetingContributor = getResource(
       Map.of(
@@ -468,14 +467,7 @@ public class TestUtil {
       emptyMap()
     ).setLabel("CONTRIBUTOR FAMILY name");
 
-    var organizationContributor = getResource(
-      Map.of(
-        NAME, List.of("CONTRIBUTOR ORGANIZATION name"),
-        LCNAF_ID, List.of("CONTRIBUTOR ORGANIZATION LCNAF id")
-      ),
-      Set.of(ORGANIZATION),
-      emptyMap()
-    ).setLabel("CONTRIBUTOR ORGANIZATION name");
+    var organizationContributor = organization("CONTRIBUTOR ORGANIZATION name");
 
     var category = getResource(
       Map.of(
@@ -515,6 +507,16 @@ public class TestUtil {
       Set.of(WORK),
       pred2OutgoingResources
     ).setLabel("Work: label");
+  }
+
+  private static Resource organization(String name) {
+    return getResource(
+      Map.of(
+        NAME, List.of(name)
+      ),
+      Set.of(ORGANIZATION),
+      emptyMap()
+    ).setLabel(name);
   }
 
   private Resource createFormConcept() {
@@ -654,27 +656,6 @@ public class TestUtil {
       Set.of(CATEGORY),
       pred2OutgoingResources
     ).setLabel("code");
-  }
-
-  private Resource formConcept() {
-    var properties = Stream.concat(
-        createCommonConceptProperties("form").entrySet().stream(),
-        Map.ofEntries(
-          entry(GEOGRAPHIC_COVERAGE, List.of("form geographic coverage"))
-        ).entrySet().stream())
-      .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-    var form = getResource(removeNonFocusProperties(properties), Set.of(FORM), emptyMap())
-      .setLabel(properties.get(NAME).get(0));
-    var subForm = getResource(Map.of(NAME, properties.get(FORM_SUBDIVISION)), Set.of(FORM), emptyMap());
-    var topic = getResource(Map.of(NAME, properties.get(GENERAL_SUBDIVISION)), Set.of(TOPIC), emptyMap());
-    var temporal = getResource(Map.of(NAME, properties.get(CHRONOLOGICAL_SUBDIVISION)), Set.of(TEMPORAL),
-      emptyMap());
-    var place = getResource(Map.of(NAME, properties.get(GEOGRAPHIC_SUBDIVISION)), Set.of(PLACE), emptyMap());
-    var pred2OutgoingResources = new LinkedHashMap<PredicateDictionary, List<Resource>>();
-    pred2OutgoingResources.put(FOCUS, List.of(form));
-    pred2OutgoingResources.put(SUB_FOCUS, List.of(subForm, topic, temporal, place));
-    return getResource(properties, Set.of(CONCEPT, FORM), pred2OutgoingResources)
-      .setLabel(properties.get(NAME).get(0));
   }
 
   private Map<PropertyDictionary, List<String>> createCommonConceptProperties(String prefix) {
@@ -845,6 +826,20 @@ public class TestUtil {
       Set.of(CATEGORY_SET),
       emptyMap()
     ).setLabel("categorySet label");
+  }
+
+  public static Resource dissertation() {
+    return getResource(
+      Map.of(
+        LABEL, List.of("Dissertation label"),
+        DEGREE, List.of("Dissertation degree"),
+        DISSERTATION_YEAR, List.of("Dissertation year"),
+        DISSERTATION_NOTE, List.of("Dissertation note"),
+        DISSERTATION_ID, List.of("Dissertation ID")
+      ),
+      Set.of(DISSERTATION),
+      Map.of(GRANTING_INSTITUTION, List.of(organization("Dissertation granting institution")))
+    ).setLabel("Dissertation label");
   }
 
   public static Resource getResource(Map<PropertyDictionary, List<String>> propertiesDic,
