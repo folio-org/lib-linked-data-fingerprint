@@ -77,6 +77,17 @@ rules:
     edges:
       - predicate: IS_DEFINED_BY
         label: true
+  - types: DISSERTATION
+    properties:
+      - LABEL
+      - DEGREE
+      - DISSERTATION_YEAR
+      - DISSERTATION_NOTE
+      - DISSERTATION_ID
+    edges:
+      - predicate: GRANTING_INSTITUTION
+        edgeProperties:
+            NAME: http://bibfra.me/vocab/marc/grantingInstitution
   - types: ID_LCCN, IDENTIFIER
     properties:
       - NAME

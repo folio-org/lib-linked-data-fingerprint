@@ -3,6 +3,7 @@ package org.folio.ld.fingerprint;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.folio.ld.fingerprint.test.TestUtil.category;
 import static org.folio.ld.fingerprint.test.TestUtil.categorySet;
+import static org.folio.ld.fingerprint.test.TestUtil.dissertation;
 import static org.folio.ld.fingerprint.test.TestUtil.id_isbn;
 import static org.folio.ld.fingerprint.test.TestUtil.id_lccn;
 import static org.folio.ld.fingerprint.test.TestUtil.instance;
@@ -38,6 +39,7 @@ class FingerprintServiceIT {
     return Stream.of(
       Arguments.of(category("category"), "category.json"),
       Arguments.of(categorySet(), "categorySet.json"),
+      Arguments.of(dissertation(), "dissertation.json"),
       Arguments.of(meetingConcept(), "meetingConcept.json"),
       Arguments.of(id_lccn(), "id_lccn.json"),
       Arguments.of(id_isbn(), "id_isbn.json"),
