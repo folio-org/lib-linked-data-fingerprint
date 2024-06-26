@@ -851,7 +851,6 @@ public class TestUtil {
     return getResource(
       Map.of(
         CODE, List.of("eng"),
-        TERM, List.of(""),
         LINK, List.of("http://id.loc.gov/vocabulary/languages/eng")
       ),
       Set.of(LANGUAGE_CATEGORY),

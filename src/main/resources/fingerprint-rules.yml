@@ -29,7 +29,8 @@ rules:
       - predicate: SUBJECT
         label: true
       - predicate: LANGUAGE
-        label: true
+        edgeProperties:
+          CODE: http://bibfra.me/vocab/marc/code
   - types: INSTANCE
     label: true
     edges:
