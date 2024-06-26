@@ -1,8 +1,6 @@
 rules:
   - types: WORK
     label: true
-    properties:
-      - LANGUAGE
     edges:
       - predicate: CREATOR
         types: FAMILY
@@ -29,6 +27,8 @@ rules:
         types: PERSON
         label: true
       - predicate: SUBJECT
+        label: true
+      - predicate: LANGUAGE
         label: true
   - types: INSTANCE
     label: true
@@ -267,3 +267,6 @@ rules:
       - PART_NUMBER
       - PART_NAME
       - VARIANT_TYPE
+  - types: LANGUAGE_CATEGORY
+    properties:
+      - CODE
