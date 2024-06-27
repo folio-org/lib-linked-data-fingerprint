@@ -30,7 +30,7 @@ rules:
         label: true
       - predicate: LANGUAGE
         edgeProperties:
-          CODE: http://bibfra.me/vocab/marc/code
+          CODE: http://bibfra.me/vocab/lite/language
   - types: INSTANCE
     label: true
     edges:
