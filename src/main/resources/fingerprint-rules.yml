@@ -1,8 +1,6 @@
 rules:
   - types: WORK
     label: true
-    properties:
-      - LANGUAGE
     edges:
       - predicate: CREATOR
         types: FAMILY
@@ -30,6 +28,9 @@ rules:
         label: true
       - predicate: SUBJECT
         label: true
+      - predicate: LANGUAGE
+        edgeProperties:
+          CODE: http://bibfra.me/vocab/lite/language
   - types: INSTANCE
     label: true
     edges:
@@ -278,3 +279,6 @@ rules:
       - PART_NUMBER
       - PART_NAME
       - VARIANT_TYPE
+  - types: LANGUAGE_CATEGORY
+    properties:
+      - CODE

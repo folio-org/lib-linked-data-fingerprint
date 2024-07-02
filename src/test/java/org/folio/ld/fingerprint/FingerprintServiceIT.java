@@ -8,6 +8,7 @@ import static org.folio.ld.fingerprint.test.TestUtil.id_isbn;
 import static org.folio.ld.fingerprint.test.TestUtil.id_lccn;
 import static org.folio.ld.fingerprint.test.TestUtil.instance;
 import static org.folio.ld.fingerprint.test.TestUtil.instanceTitle;
+import static org.folio.ld.fingerprint.test.TestUtil.languageCategory;
 import static org.folio.ld.fingerprint.test.TestUtil.lcClassification;
 import static org.folio.ld.fingerprint.test.TestUtil.loadResourceAsString;
 import static org.folio.ld.fingerprint.test.TestUtil.meetingConcept;
@@ -38,6 +39,7 @@ class FingerprintServiceIT {
   private static Stream<Arguments> provideResourceAndExpectedFingerprint() {
     return Stream.of(
       Arguments.of(category("category"), "category.json"),
+      Arguments.of(languageCategory(), "languageCategory.json"),
       Arguments.of(categorySet(), "categorySet.json"),
       Arguments.of(dissertation(), "dissertation.json"),
       Arguments.of(meetingConcept(), "meetingConcept.json"),

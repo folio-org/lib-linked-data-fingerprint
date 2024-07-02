@@ -15,6 +15,7 @@ import static org.folio.ld.dictionary.PredicateDictionary.GOVERNMENT_PUBLICATION
 import static org.folio.ld.dictionary.PredicateDictionary.GRANTING_INSTITUTION;
 import static org.folio.ld.dictionary.PredicateDictionary.INSTANTIATES;
 import static org.folio.ld.dictionary.PredicateDictionary.IS_DEFINED_BY;
+import static org.folio.ld.dictionary.PredicateDictionary.LANGUAGE;
 import static org.folio.ld.dictionary.PredicateDictionary.MAP;
 import static org.folio.ld.dictionary.PredicateDictionary.MEDIA;
 import static org.folio.ld.dictionary.PredicateDictionary.PE_DISTRIBUTION;
@@ -70,7 +71,6 @@ import static org.folio.ld.dictionary.PropertyDictionary.ISSUANCE_NOTE;
 import static org.folio.ld.dictionary.PropertyDictionary.ISSUING_BODY;
 import static org.folio.ld.dictionary.PropertyDictionary.ITEM_NUMBER;
 import static org.folio.ld.dictionary.PropertyDictionary.LABEL;
-import static org.folio.ld.dictionary.PropertyDictionary.LANGUAGE;
 import static org.folio.ld.dictionary.PropertyDictionary.LCNAF_ID;
 import static org.folio.ld.dictionary.PropertyDictionary.LINK;
 import static org.folio.ld.dictionary.PropertyDictionary.LINKAGE;
@@ -129,6 +129,7 @@ import static org.folio.ld.dictionary.ResourceTypeDictionary.ID_LOCAL;
 import static org.folio.ld.dictionary.ResourceTypeDictionary.ID_UNKNOWN;
 import static org.folio.ld.dictionary.ResourceTypeDictionary.INSTANCE;
 import static org.folio.ld.dictionary.ResourceTypeDictionary.JURISDICTION;
+import static org.folio.ld.dictionary.ResourceTypeDictionary.LANGUAGE_CATEGORY;
 import static org.folio.ld.dictionary.ResourceTypeDictionary.MEETING;
 import static org.folio.ld.dictionary.ResourceTypeDictionary.ORGANIZATION;
 import static org.folio.ld.dictionary.ResourceTypeDictionary.PARALLEL_TITLE;
@@ -479,6 +480,16 @@ public class TestUtil {
       emptyMap()
     ).setLabel("Autonomous");
 
+    var languageCategory = getResource(
+      Map.of(
+        CODE, List.of("eng"),
+        LINK, List.of("http://id.loc.gov/vocabulary/languages/eng"),
+        TERM, List.of("")
+      ),
+      Set.of(LANGUAGE_CATEGORY),
+      emptyMap()
+    ).setLabel("eng");
+
     var pred2OutgoingResources = new LinkedHashMap<PredicateDictionary, List<Resource>>();
     pred2OutgoingResources.put(PredicateDictionary.GEOGRAPHIC_COVERAGE, List.of(place));
     pred2OutgoingResources.put(CLASSIFICATION, List.of(lcClassification(), deweyClassification));
@@ -494,11 +505,11 @@ public class TestUtil {
       createPlaceConcept(), formConcept));
     pred2OutgoingResources.put(GENRE, List.of(formConcept.getOutgoingEdges().iterator().next().getTarget()));
     pred2OutgoingResources.put(GOVERNMENT_PUBLICATION, List.of(category));
+    pred2OutgoingResources.put(LANGUAGE, List.of(languageCategory));
 
     return getResource(
       Map.of(
         TARGET_AUDIENCE, List.of("primary"),
-        LANGUAGE, List.of("eng"),
         SUMMARY, List.of("work summary"),
         TABLE_OF_CONTENTS, List.of("work table of contents"),
         DATE_START, List.of("2023"),
@@ -815,6 +826,17 @@ public class TestUtil {
       Set.of(CATEGORY),
       emptyMap()
     ).setLabel(prefix + " term");
+  }
+
+  public static Resource languageCategory() {
+    return getResource(
+      Map.of(
+        CODE, List.of("eng"),
+        LINK, List.of("http://id.loc.gov/vocabulary/languages/eng")
+      ),
+      Set.of(LANGUAGE_CATEGORY),
+      emptyMap()
+    ).setLabel("eng");
   }
 
   public static Resource categorySet() {
