@@ -94,7 +94,9 @@ public class FingerprintServiceImpl implements FingerprintService {
             .ifPresent(edgeRule -> edgesFp.addAll(getEdgeFingerprint(oe.getTarget(), edgeRule))))
         );
     }
-    return edgesFp;
+    return edgesFp.stream()
+      .sorted(comparing((List<String> pair) -> pair.get(0)).thenComparing(pair -> pair.get(1)))
+      .toList();
   }
 
   private boolean filterEdgeRule(ResourceEdge oe, FingerprintRules.EdgeRule edgeRule) {
@@ -122,7 +124,6 @@ public class FingerprintServiceImpl implements FingerprintService {
         .stream()
         .flatMap(p -> e.getValue().stream().map(v -> List.of(rule.edgeProperties().get(p), v)).toList().stream())
       )
-      .sorted(comparing((List<String> pair) -> pair.get(0)).thenComparing(pair -> pair.get(1)))
       .forEach(propertiesFp::add);
     return propertiesFp;
   }
