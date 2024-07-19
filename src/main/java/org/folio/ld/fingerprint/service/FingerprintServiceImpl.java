@@ -26,7 +26,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class FingerprintServiceImpl implements FingerprintService {
-  private static final String TYPE_IRI = "http://bibfra.me/purl/versa/type";
+  private static final String TYPE_URI = "http://bibfra.me/purl/versa/type";
   private final FingerprintRules rules;
   private final ObjectMapper mapper;
 
@@ -49,12 +49,16 @@ public class FingerprintServiceImpl implements FingerprintService {
     ofNullable(rule).flatMap(r -> collectLabel(resource, r.label())).ifPresent(fingerprint::add);
     fingerprint.addAll(collectProperties(resource, rule));
     fingerprint.addAll(collectEdges(resource, rule));
-    return fingerprint;
+    return fingerprint.stream()
+      .sorted(comparing((List<String> pair) -> pair.get(0)).thenComparing(pair -> pair.get(1)))
+      .toList();
   }
 
   private List<List<String>> collectTypes(Resource resource) {
-    return resource.getTypes().stream().map(ResourceTypeDictionary::getUri).sorted()
-      .map(type -> List.of(TYPE_IRI, type))
+    return resource.getTypes()
+      .stream()
+      .map(ResourceTypeDictionary::getUri)
+      .map(type -> List.of(TYPE_URI, type))
       .toList();
   }
 
@@ -78,8 +82,7 @@ public class FingerprintServiceImpl implements FingerprintService {
         .map(p -> rule.properties().contains(p))
         .orElse(false)
       )
-      .sorted(comparing(Map.Entry<String, List<String>>::getKey).thenComparing(map -> String.join(",", map.getValue())))
-      .forEach(e -> e.getValue().stream().sorted().forEach(v -> propertiesFp.add(List.of(e.getKey(), v))));
+      .forEach(e -> e.getValue().forEach(v -> propertiesFp.add(List.of(e.getKey(), v))));
     return propertiesFp;
   }
 
@@ -94,9 +97,7 @@ public class FingerprintServiceImpl implements FingerprintService {
             .ifPresent(edgeRule -> edgesFp.addAll(getEdgeFingerprint(oe.getTarget(), edgeRule))))
         );
     }
-    return edgesFp.stream()
-      .sorted(comparing((List<String> pair) -> pair.get(0)).thenComparing(pair -> pair.get(1)))
-      .toList();
+    return edgesFp;
   }
 
   private boolean filterEdgeRule(ResourceEdge oe, FingerprintRules.EdgeRule edgeRule) {
