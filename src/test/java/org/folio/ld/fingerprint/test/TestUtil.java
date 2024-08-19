@@ -159,7 +159,7 @@ import org.apache.commons.io.IOUtils;
 import org.folio.ld.dictionary.PredicateDictionary;
 import org.folio.ld.dictionary.PropertyDictionary;
 import org.folio.ld.dictionary.ResourceTypeDictionary;
-import org.folio.ld.dictionary.model.InstanceMetadata;
+import org.folio.ld.dictionary.model.FolioMetadata;
 import org.folio.ld.dictionary.model.Resource;
 import org.folio.ld.dictionary.model.ResourceEdge;
 import org.folio.ld.fingerprint.config.FingerprintObjectMapperBackupConfig;
@@ -376,7 +376,7 @@ public class TestUtil {
       ),
       Set.of(INSTANCE),
       pred2OutgoingResources)
-      .setInstanceMetadata(new InstanceMetadata()
+      .setFolioMetadata(new FolioMetadata()
         .setInventoryId("2165ef4b-001f-46b3-a60e-52bcdeb3d5a1")
         .setSrsId("43d58061-decf-4d74-9747-0e1c368e861b")
       );
