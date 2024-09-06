@@ -33,6 +33,8 @@ rules:
           CODE: http://bibfra.me/vocab/lite/language
   - types: INSTANCE
     label: true
+    properties:
+      - STATEMENT_OF_RESPONSIBILITY
     edges:
       - predicate: CREATOR
         types: FAMILY
