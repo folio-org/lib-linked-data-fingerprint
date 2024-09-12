@@ -264,6 +264,7 @@ rules:
       - SUBTITLE
       - PART_NUMBER
       - PART_NAME
+      - QUALIFIER
   - types: PARALLEL_TITLE
     properties:
       - MAIN_TITLE
