@@ -101,6 +101,7 @@ import static org.folio.ld.dictionary.PropertyDictionary.RELATOR_TERM;
 import static org.folio.ld.dictionary.PropertyDictionary.REPRODUCTION_NOTE;
 import static org.folio.ld.dictionary.PropertyDictionary.SIMPLE_PLACE;
 import static org.folio.ld.dictionary.PropertyDictionary.SOURCE;
+import static org.folio.ld.dictionary.PropertyDictionary.STATEMENT_OF_RESPONSIBILITY;
 import static org.folio.ld.dictionary.PropertyDictionary.SUBORDINATE_UNIT;
 import static org.folio.ld.dictionary.PropertyDictionary.SUBTITLE;
 import static org.folio.ld.dictionary.PropertyDictionary.SUMMARY;
@@ -331,6 +332,7 @@ public class TestUtil {
 
     var instance = getResource(
       Map.ofEntries(
+        entry(STATEMENT_OF_RESPONSIBILITY, List.of("statement of responsibility")),
         entry(EXTENT, List.of("extent")),
         entry(DIMENSIONS, List.of("dimensions")),
         entry(EDITION_STATEMENT, List.of("Edition Statement Edition statement2")),
@@ -710,7 +712,8 @@ public class TestUtil {
         PART_NUMBER, List.of("Instance: partNumber"),
         MAIN_TITLE, List.of("Instance: mainTitle"),
         NON_SORT_NUM, List.of("Instance: nonSortNum"),
-        SUBTITLE, List.of("Instance: subTitle")
+        SUBTITLE, List.of("Instance: subTitle"),
+        QUALIFIER, List.of("qualifier")
       ),
       Set.of(ResourceTypeDictionary.TITLE),
       emptyMap()
