@@ -35,4 +35,4 @@ public class YourService {
 ```
 
 ### Dependencies
-- [lib-linked-data-dictionary](https://github.com/FOLIO-EIS/lib-linked-data-dictionary)
+- [lib-linked-data-dictionary](https://github.com/folio-org/lib-linked-data-dictionary)
