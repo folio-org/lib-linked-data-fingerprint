@@ -13,7 +13,6 @@ import static org.folio.ld.dictionary.PredicateDictionary.FOCUS;
 import static org.folio.ld.dictionary.PredicateDictionary.GENRE;
 import static org.folio.ld.dictionary.PredicateDictionary.GOVERNMENT_PUBLICATION;
 import static org.folio.ld.dictionary.PredicateDictionary.GRANTING_INSTITUTION;
-import static org.folio.ld.dictionary.PredicateDictionary.INSTANTIATES;
 import static org.folio.ld.dictionary.PredicateDictionary.IS_DEFINED_BY;
 import static org.folio.ld.dictionary.PredicateDictionary.LANGUAGE;
 import static org.folio.ld.dictionary.PredicateDictionary.MAP;
@@ -303,10 +302,6 @@ public class TestUtil {
     pred2OutgoingResources.put(MEDIA, List.of(category("MEDIA")));
     pred2OutgoingResources.put(CARRIER, List.of(carrier));
     pred2OutgoingResources.put(COPYRIGHT, List.of(copyrightEvent));
-    var work = work();
-    work.addTitle(getPrimaryWithMainTitle("Work Title 2"), OBJECT_MAPPER);
-    work.addTitle(getPrimaryWithSubTitle("Work Title Sub"), OBJECT_MAPPER);
-    pred2OutgoingResources.put(INSTANTIATES, List.of(work));
 
     var instance = getResource(
       Map.ofEntries(
@@ -360,6 +355,9 @@ public class TestUtil {
         .setInventoryId("2165ef4b-001f-46b3-a60e-52bcdeb3d5a1")
         .setSrsId("43d58061-decf-4d74-9747-0e1c368e861b")
       );
+    instance.addTitle(getPrimaryWithMainTitle("Instance Title 1"), OBJECT_MAPPER);
+    instance.addTitle(getPrimaryWithMainTitle("Instance Title 2"), OBJECT_MAPPER);
+    instance.addTitle(getPrimaryWithSubTitle("Instance Title Sub"), OBJECT_MAPPER);
     return instance.setLabel("Instance label");
   }
 
@@ -501,7 +499,8 @@ public class TestUtil {
       pred2OutgoingResources
     ).setLabel("Work: label");
 
-    work.addTitle(getPrimaryWithMainTitle("Work Title main"), OBJECT_MAPPER);
+    work.addTitle(getPrimaryWithMainTitle("Work Title main 1"), OBJECT_MAPPER);
+    work.addTitle(getPrimaryWithMainTitle("Work Title main 2"), OBJECT_MAPPER);
     work.addTitle(getPrimaryWithSubTitle("Work Title sub"), OBJECT_MAPPER);
     return work;
   }

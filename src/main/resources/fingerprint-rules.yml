@@ -34,6 +34,7 @@ rules:
           CODE: http://bibfra.me/vocab/lite/language
   - types: INSTANCE
     label: true
+    title: true
     properties:
       - STATEMENT_OF_RESPONSIBILITY
     edges:
@@ -69,9 +70,6 @@ rules:
         types: ID_LCCN, IDENTIFIER
         edgeProperties:
           NAME: http://bibfra.me/vocab/marc/lccn
-      - predicate: INSTANTIATES
-        types: WORK
-        title: true
   - types: CATEGORY
     properties:
       - TERM
