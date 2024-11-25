@@ -26,7 +26,6 @@ import static org.folio.ld.dictionary.PredicateDictionary.PROVIDER_PLACE;
 import static org.folio.ld.dictionary.PredicateDictionary.STATUS;
 import static org.folio.ld.dictionary.PredicateDictionary.SUBJECT;
 import static org.folio.ld.dictionary.PredicateDictionary.SUB_FOCUS;
-import static org.folio.ld.dictionary.PredicateDictionary.TITLE;
 import static org.folio.ld.dictionary.PropertyDictionary.ACCESSIBILITY_NOTE;
 import static org.folio.ld.dictionary.PropertyDictionary.ADDITIONAL_PHYSICAL_FORM;
 import static org.folio.ld.dictionary.PropertyDictionary.AFFILIATION;
@@ -78,18 +77,14 @@ import static org.folio.ld.dictionary.PropertyDictionary.LOCAL_ID_VALUE;
 import static org.folio.ld.dictionary.PropertyDictionary.LOCATION_OF_EVENT;
 import static org.folio.ld.dictionary.PropertyDictionary.LOCATION_OF_ORIGINALS_DUPLICATES;
 import static org.folio.ld.dictionary.PropertyDictionary.LOCATION_OF_OTHER_ARCHIVAL_MATERIAL;
-import static org.folio.ld.dictionary.PropertyDictionary.MAIN_TITLE;
 import static org.folio.ld.dictionary.PropertyDictionary.MATERIALS_SPECIFIED;
 import static org.folio.ld.dictionary.PropertyDictionary.MISC_INFO;
 import static org.folio.ld.dictionary.PropertyDictionary.NAME;
 import static org.folio.ld.dictionary.PropertyDictionary.NAME_ALTERNATIVE;
-import static org.folio.ld.dictionary.PropertyDictionary.NON_SORT_NUM;
 import static org.folio.ld.dictionary.PropertyDictionary.NOTE;
 import static org.folio.ld.dictionary.PropertyDictionary.NUMERATION;
 import static org.folio.ld.dictionary.PropertyDictionary.ORIGINAL_VERSION_NOTE;
 import static org.folio.ld.dictionary.PropertyDictionary.PARTICIPANT_NOTE;
-import static org.folio.ld.dictionary.PropertyDictionary.PART_NAME;
-import static org.folio.ld.dictionary.PropertyDictionary.PART_NUMBER;
 import static org.folio.ld.dictionary.PropertyDictionary.PHYSICAL_DESCRIPTION;
 import static org.folio.ld.dictionary.PropertyDictionary.PROJECTED_PROVISION_DATE;
 import static org.folio.ld.dictionary.PropertyDictionary.PROVIDER_DATE;
@@ -103,7 +98,6 @@ import static org.folio.ld.dictionary.PropertyDictionary.SIMPLE_PLACE;
 import static org.folio.ld.dictionary.PropertyDictionary.SOURCE;
 import static org.folio.ld.dictionary.PropertyDictionary.STATEMENT_OF_RESPONSIBILITY;
 import static org.folio.ld.dictionary.PropertyDictionary.SUBORDINATE_UNIT;
-import static org.folio.ld.dictionary.PropertyDictionary.SUBTITLE;
 import static org.folio.ld.dictionary.PropertyDictionary.SUMMARY;
 import static org.folio.ld.dictionary.PropertyDictionary.SYSTEM_DETAILS;
 import static org.folio.ld.dictionary.PropertyDictionary.SYSTEM_DETAILS_ACCESS_NOTE;
@@ -112,7 +106,6 @@ import static org.folio.ld.dictionary.PropertyDictionary.TARGET_AUDIENCE;
 import static org.folio.ld.dictionary.PropertyDictionary.TERM;
 import static org.folio.ld.dictionary.PropertyDictionary.TITLES;
 import static org.folio.ld.dictionary.PropertyDictionary.TYPE_OF_REPORT;
-import static org.folio.ld.dictionary.PropertyDictionary.VARIANT_TYPE;
 import static org.folio.ld.dictionary.PropertyDictionary.WITH_NOTE;
 import static org.folio.ld.dictionary.ResourceTypeDictionary.ANNOTATION;
 import static org.folio.ld.dictionary.ResourceTypeDictionary.CATEGORY;
@@ -133,18 +126,17 @@ import static org.folio.ld.dictionary.ResourceTypeDictionary.JURISDICTION;
 import static org.folio.ld.dictionary.ResourceTypeDictionary.LANGUAGE_CATEGORY;
 import static org.folio.ld.dictionary.ResourceTypeDictionary.MEETING;
 import static org.folio.ld.dictionary.ResourceTypeDictionary.ORGANIZATION;
-import static org.folio.ld.dictionary.ResourceTypeDictionary.PARALLEL_TITLE;
 import static org.folio.ld.dictionary.ResourceTypeDictionary.PERSON;
 import static org.folio.ld.dictionary.ResourceTypeDictionary.PLACE;
 import static org.folio.ld.dictionary.ResourceTypeDictionary.PROVIDER_EVENT;
 import static org.folio.ld.dictionary.ResourceTypeDictionary.SUPPLEMENTARY_CONTENT;
 import static org.folio.ld.dictionary.ResourceTypeDictionary.TEMPORAL;
 import static org.folio.ld.dictionary.ResourceTypeDictionary.TOPIC;
-import static org.folio.ld.dictionary.ResourceTypeDictionary.VARIANT_TITLE;
 import static org.folio.ld.dictionary.ResourceTypeDictionary.WORK;
 
-import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.nio.charset.StandardCharsets;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -163,6 +155,7 @@ import org.folio.ld.dictionary.ResourceTypeDictionary;
 import org.folio.ld.dictionary.model.FolioMetadata;
 import org.folio.ld.dictionary.model.Resource;
 import org.folio.ld.dictionary.model.ResourceEdge;
+import org.folio.ld.dictionary.model.title.PrimaryTitle;
 import org.folio.ld.fingerprint.config.FingerprintObjectMapperBackupConfig;
 import org.springframework.core.io.ResourceLoader;
 
@@ -178,23 +171,7 @@ public class TestUtil {
     return IOUtils.toString(is, StandardCharsets.UTF_8);
   }
 
-  public static Resource instance() {
-    var instanceTitle2 = getResource(
-      Map.of(
-        MAIN_TITLE, List.of("Instance Title empty")
-      ),
-      Set.of(ResourceTypeDictionary.TITLE),
-      emptyMap()
-    ).setLabel("Instance Title empty");
-
-    var instanceTitle3 = getResource(
-      Map.of(
-        SUBTITLE, List.of("Instance Title empty label")
-      ),
-      Set.of(ResourceTypeDictionary.TITLE),
-      emptyMap()
-    ).setLabel("Instance Title empty label");
-
+  public static Resource instance() throws JsonProcessingException {
     var production = providerEvent("Production");
     var publication = providerEvent("Publication");
     var distribution = providerEvent("Distribution");
@@ -314,8 +291,6 @@ public class TestUtil {
     ).setLabel("2018");
 
     var pred2OutgoingResources = new LinkedHashMap<PredicateDictionary, List<Resource>>();
-    pred2OutgoingResources.put(TITLE,
-      List.of(instanceTitle(), parallelTitle(), variantTitle(), instanceTitle2, instanceTitle3));
     pred2OutgoingResources.put(PE_PRODUCTION, List.of(production));
     pred2OutgoingResources.put(PE_PUBLICATION, List.of(publication));
     pred2OutgoingResources.put(PE_DISTRIBUTION, List.of(distribution));
@@ -328,7 +303,10 @@ public class TestUtil {
     pred2OutgoingResources.put(MEDIA, List.of(category("MEDIA")));
     pred2OutgoingResources.put(CARRIER, List.of(carrier));
     pred2OutgoingResources.put(COPYRIGHT, List.of(copyrightEvent));
-    pred2OutgoingResources.put(INSTANTIATES, List.of(work()));
+    var work = work();
+    work.addTitle(getPrimaryWithMainTitle("Work Title 2"), OBJECT_MAPPER);
+    work.addTitle(getPrimaryWithSubTitle("Work Title Sub"), OBJECT_MAPPER);
+    pred2OutgoingResources.put(INSTANTIATES, List.of(work));
 
     var instance = getResource(
       Map.ofEntries(
@@ -385,7 +363,7 @@ public class TestUtil {
     return instance.setLabel("Instance label");
   }
 
-  public static Resource work() {
+  public static Resource work() throws JsonProcessingException {
     var place = getResource(
       Map.of(
         NAME, List.of("United States"),
@@ -511,7 +489,7 @@ public class TestUtil {
     pred2OutgoingResources.put(GOVERNMENT_PUBLICATION, List.of(category));
     pred2OutgoingResources.put(LANGUAGE, List.of(languageCategory));
 
-    return getResource(
+    var work = getResource(
       Map.of(
         TARGET_AUDIENCE, List.of("primary"),
         SUMMARY, List.of("work summary"),
@@ -522,6 +500,10 @@ public class TestUtil {
       Set.of(WORK),
       pred2OutgoingResources
     ).setLabel("Work: label");
+
+    work.addTitle(getPrimaryWithMainTitle("Work Title main"), OBJECT_MAPPER);
+    work.addTitle(getPrimaryWithSubTitle("Work Title sub"), OBJECT_MAPPER);
+    return work;
   }
 
   private static Resource organization(String name) {
@@ -706,51 +688,6 @@ public class TestUtil {
       .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
   }
 
-  public static Resource instanceTitle() {
-    return getResource(Map.of(
-        PART_NAME, List.of("Instance: partName"),
-        PART_NUMBER, List.of("Instance: partNumber"),
-        MAIN_TITLE, List.of("Instance: mainTitle"),
-        NON_SORT_NUM, List.of("Instance: nonSortNum"),
-        SUBTITLE, List.of("Instance: subTitle"),
-        QUALIFIER, List.of("qualifier")
-      ),
-      Set.of(ResourceTypeDictionary.TITLE),
-      emptyMap()
-    ).setLabel("Instance: mainTitle");
-  }
-
-  public static Resource parallelTitle() {
-    return getResource(
-      Map.of(
-        PART_NAME, List.of("Parallel-PartName"),
-        PART_NUMBER, List.of("6"),
-        MAIN_TITLE, List.of("Parallel-MainTitle"),
-        DATE, List.of("2023-01-01"),
-        SUBTITLE, List.of("Parallel-SubTitle"),
-        NOTE, List.of("Parallel-Note")
-      ),
-      Set.of(PARALLEL_TITLE),
-      emptyMap()
-    ).setLabel("Parallel-MainTitle");
-  }
-
-  public static Resource variantTitle() {
-    return getResource(
-      Map.of(
-        PART_NAME, List.of("Variant-PartName"),
-        PART_NUMBER, List.of("5"),
-        MAIN_TITLE, List.of("Variant-MainTitle"),
-        DATE, List.of("2023-02-02"),
-        SUBTITLE, List.of("Variant-SubTitle"),
-        VARIANT_TYPE, List.of("9"),
-        NOTE, List.of("Variant-Note")
-      ),
-      Set.of(VARIANT_TITLE),
-      emptyMap()
-    ).setLabel("Variant-MainTitle");
-  }
-
   public static Resource meetingConcept() {
     return getResource(
       Map.of(
@@ -884,8 +821,20 @@ public class TestUtil {
     return resource;
   }
 
-  private static JsonNode getJsonNode(Map<String, ?> map) {
-    return OBJECT_MAPPER.convertValue(map, JsonNode.class);
+  private static PrimaryTitle getPrimaryWithMainTitle(String value) {
+    var ptMain = new PrimaryTitle();
+    ptMain.mainTitles.add(value);
+    return ptMain;
+  }
+
+  private static PrimaryTitle getPrimaryWithSubTitle(String value) {
+    var ptSub = new PrimaryTitle();
+    ptSub.subTitles.add(value);
+    return ptSub;
+  }
+
+  private static ObjectNode getJsonNode(Map<String, ?> map) {
+    return OBJECT_MAPPER.convertValue(map, ObjectNode.class);
   }
 
 }

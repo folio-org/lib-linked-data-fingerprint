@@ -1,6 +1,7 @@
 rules:
   - types: WORK
     label: true
+    title: true
     edges:
       - predicate: CREATOR
         types: FAMILY
@@ -68,10 +69,9 @@ rules:
         types: ID_LCCN, IDENTIFIER
         edgeProperties:
           NAME: http://bibfra.me/vocab/marc/lccn
-      - predicate: TITLE
-        types: TITLE
-        edgeProperties:
-          MAIN_TITLE: http://bibfra.me/vocab/marc/mainHeading
+      - predicate: INSTANTIATES
+        types: WORK
+        title: true
   - types: CATEGORY
     properties:
       - TERM

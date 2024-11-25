@@ -16,10 +16,18 @@ public class FingerprintRules {
 
   private List<FingerprintRule> rules;
 
-  public record FingerprintRule(Set<String> types, boolean label, Set<String> properties, Set<EdgeRule> edges) {
+  public record FingerprintRule(Set<String> types,
+                                boolean label,
+                                boolean title,
+                                Set<String> properties,
+                                Set<EdgeRule> edges) {
   }
 
-  public record EdgeRule(Set<String> types, String predicate, boolean label, Map<String, String> edgeProperties) {
+  public record EdgeRule(Set<String> types,
+                         String predicate,
+                         boolean label,
+                         boolean title,
+                         Map<String, String> edgeProperties) {
   }
 
 }
