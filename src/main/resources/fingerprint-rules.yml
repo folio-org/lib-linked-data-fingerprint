@@ -1,6 +1,7 @@
 rules:
   - types: WORK
     label: true
+    title: true
     edges:
       - predicate: CREATOR
         types: FAMILY
@@ -33,6 +34,7 @@ rules:
           CODE: http://bibfra.me/vocab/lite/language
   - types: INSTANCE
     label: true
+    title: true
     properties:
       - STATEMENT_OF_RESPONSIBILITY
     edges:
@@ -68,10 +70,6 @@ rules:
         types: ID_LCCN, IDENTIFIER
         edgeProperties:
           NAME: http://bibfra.me/vocab/marc/lccn
-      - predicate: TITLE
-        types: TITLE
-        edgeProperties:
-          MAIN_TITLE: http://bibfra.me/vocab/marc/mainHeading
   - types: CATEGORY
     properties:
       - TERM
