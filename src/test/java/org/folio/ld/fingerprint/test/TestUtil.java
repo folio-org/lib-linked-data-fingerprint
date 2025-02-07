@@ -443,6 +443,15 @@ public class TestUtil {
       emptyMap()
     ).setLabel("CREATOR FAMILY name");
 
+    var jurisdictionCreator = getResource(
+      Map.of(
+        NAME, List.of("CREATOR JURISDICTION name"),
+        LCNAF_ID, List.of("CREATOR JURISDICTION LCNAF id")
+      ),
+      Set.of(JURISDICTION),
+      emptyMap()
+    ).setLabel("CREATOR JURISDICTION name");
+
     var organizationCreator = organization("CREATOR ORGANIZATION name");
 
     var meetingContributor = getResource(
@@ -474,6 +483,15 @@ public class TestUtil {
 
     var organizationContributor = organization("CONTRIBUTOR ORGANIZATION name");
 
+    var jurisdictionContributor = getResource(
+      Map.of(
+        NAME, List.of("CONTRIBUTOR JURISDICTION name"),
+        LCNAF_ID, List.of("CONTRIBUTOR JURISDICTION LCNAF id")
+      ),
+      Set.of(JURISDICTION),
+      emptyMap()
+    ).setLabel("CONTRIBUTOR JURISDICTION name");
+
     var category = getResource(
       Map.of(
         CODE, List.of("a"),
@@ -497,9 +515,10 @@ public class TestUtil {
     var pred2OutgoingResources = new LinkedHashMap<PredicateDictionary, List<Resource>>();
     pred2OutgoingResources.put(PredicateDictionary.GEOGRAPHIC_COVERAGE, List.of(place));
     pred2OutgoingResources.put(CLASSIFICATION, List.of(lcClassification(), deweyClassification));
-    pred2OutgoingResources.put(CREATOR, List.of(meetingCreator, personCreator, organizationCreator, familyCreator));
+    pred2OutgoingResources.put(CREATOR, List.of(meetingCreator, personCreator, organizationCreator, familyCreator,
+      jurisdictionCreator));
     pred2OutgoingResources.put(CONTRIBUTOR, List.of(meetingContributor, personContributor, organizationContributor,
-      familyContributor));
+      familyContributor, jurisdictionContributor));
     pred2OutgoingResources.put(CONTENT, List.of(content));
     var formConcept = createFormConcept();
     pred2OutgoingResources.put(SUBJECT, List.of(createFamilyPersonConcept("family", FAMILY),
