@@ -3,28 +3,8 @@ rules:
     label: true
     edges:
       - predicate: CREATOR
-        types: FAMILY
-        label: true
-      - predicate: CREATOR
-        types: MEETING
-        label: true
-      - predicate: CREATOR
-        types: ORGANIZATION
-        label: true
-      - predicate: CREATOR
-        types: PERSON
         label: true
       - predicate: CONTRIBUTOR
-        types: FAMILY
-        label: true
-      - predicate: CONTRIBUTOR
-        types: MEETING
-        label: true
-      - predicate: CONTRIBUTOR
-        types: ORGANIZATION
-        label: true
-      - predicate: CONTRIBUTOR
-        types: PERSON
         label: true
       - predicate: SUBJECT
         label: true
@@ -37,28 +17,8 @@ rules:
       - STATEMENT_OF_RESPONSIBILITY
     edges:
       - predicate: CREATOR
-        types: FAMILY
-        label: true
-      - predicate: CREATOR
-        types: MEETING
-        label: true
-      - predicate: CREATOR
-        types: ORGANIZATION
-        label: true
-      - predicate: CREATOR
-        types: PERSON
         label: true
       - predicate: CONTRIBUTOR
-        types: FAMILY
-        label: true
-      - predicate: CONTRIBUTOR
-        types: MEETING
-        label: true
-      - predicate: CONTRIBUTOR
-        types: ORGANIZATION
-        label: true
-      - predicate: CONTRIBUTOR
-        types: PERSON
         label: true
       - predicate: MAP
         types: ID_ISBN, IDENTIFIER
