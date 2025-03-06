@@ -246,7 +246,6 @@ rules:
     properties:
       - CODE
   - types: CLASSIFICATION
-    label: true
     properties:
       - CODE
       - SOURCE
