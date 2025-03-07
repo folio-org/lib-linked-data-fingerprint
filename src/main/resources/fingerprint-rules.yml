@@ -245,3 +245,13 @@ rules:
   - types: LANGUAGE_CATEGORY
     properties:
       - CODE
+  - types: CLASSIFICATION
+    properties:
+      - CODE
+      - SOURCE
+      - ITEM_NUMBER
+      - EDITION_NUMBER
+      - EDITION
+    edges:
+      - predicate: STATUS
+        label: true

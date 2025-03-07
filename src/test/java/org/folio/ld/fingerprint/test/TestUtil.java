@@ -3,6 +3,7 @@ package org.folio.ld.fingerprint.test;
 import static java.util.Collections.emptyMap;
 import static java.util.Map.entry;
 import static org.folio.ld.dictionary.PredicateDictionary.ACCESS_LOCATION;
+import static org.folio.ld.dictionary.PredicateDictionary.ASSIGNING_SOURCE;
 import static org.folio.ld.dictionary.PredicateDictionary.CARRIER;
 import static org.folio.ld.dictionary.PredicateDictionary.CLASSIFICATION;
 import static org.folio.ld.dictionary.PredicateDictionary.CONTENT;
@@ -14,7 +15,6 @@ import static org.folio.ld.dictionary.PredicateDictionary.GENRE;
 import static org.folio.ld.dictionary.PredicateDictionary.GOVERNMENT_PUBLICATION;
 import static org.folio.ld.dictionary.PredicateDictionary.GRANTING_INSTITUTION;
 import static org.folio.ld.dictionary.PredicateDictionary.INSTANTIATES;
-import static org.folio.ld.dictionary.PredicateDictionary.IS_DEFINED_BY;
 import static org.folio.ld.dictionary.PredicateDictionary.LANGUAGE;
 import static org.folio.ld.dictionary.PredicateDictionary.MAP;
 import static org.folio.ld.dictionary.PredicateDictionary.MEDIA;
@@ -30,7 +30,6 @@ import static org.folio.ld.dictionary.PredicateDictionary.TITLE;
 import static org.folio.ld.dictionary.PropertyDictionary.ACCESSIBILITY_NOTE;
 import static org.folio.ld.dictionary.PropertyDictionary.ADDITIONAL_PHYSICAL_FORM;
 import static org.folio.ld.dictionary.PropertyDictionary.AFFILIATION;
-import static org.folio.ld.dictionary.PropertyDictionary.ASSIGNER;
 import static org.folio.ld.dictionary.PropertyDictionary.ATTRIBUTION;
 import static org.folio.ld.dictionary.PropertyDictionary.AUTHORITY_LINK;
 import static org.folio.ld.dictionary.PropertyDictionary.CHRONOLOGICAL_SUBDIVISION;
@@ -51,6 +50,7 @@ import static org.folio.ld.dictionary.PropertyDictionary.DISSERTATION_NOTE;
 import static org.folio.ld.dictionary.PropertyDictionary.DISSERTATION_YEAR;
 import static org.folio.ld.dictionary.PropertyDictionary.EAN_VALUE;
 import static org.folio.ld.dictionary.PropertyDictionary.EDITION;
+import static org.folio.ld.dictionary.PropertyDictionary.EDITION_NUMBER;
 import static org.folio.ld.dictionary.PropertyDictionary.ENTITY_AND_ATTRIBUTE_INFORMATION;
 import static org.folio.ld.dictionary.PropertyDictionary.EQUIVALENT;
 import static org.folio.ld.dictionary.PropertyDictionary.EXHIBITIONS_NOTE;
@@ -670,26 +670,34 @@ public class TestUtil {
   }
 
   public static Resource lcClassification() {
-    var categorySet = getResource(
-      Map.of(
-        LABEL, List.of("lc")
-      ),
-      Set.of(CATEGORY_SET),
-      emptyMap()
-    ).setLabel("lc");
-    var pred2OutgoingResources = new LinkedHashMap<PredicateDictionary, List<Resource>>();
-    pred2OutgoingResources.put(IS_DEFINED_BY, List.of(categorySet));
     return getResource(
       Map.of(
         SOURCE, List.of("lc"),
         CODE, List.of("code1", "code2"),
-        ITEM_NUMBER, List.of("item number"),
-        ASSIGNER, List.of("http://id.loc.gov/vocabulary/organizations/dlc"),
-        PropertyDictionary.STATUS, List.of("http://id.loc.gov/vocabulary/mstatus/nuba")
+        ITEM_NUMBER, List.of("item number")
       ),
-      Set.of(CATEGORY),
-      pred2OutgoingResources
-    ).setLabel("code");
+      Set.of(ResourceTypeDictionary.CLASSIFICATION),
+      Map.of(
+        ASSIGNING_SOURCE, List.of(organization("assigning org")),
+        STATUS, List.of(status("current"))
+      )
+    ).setLabel("lcClassification");
+  }
+
+  public static Resource ddcClassification() {
+    return getResource(
+      Map.of(
+        SOURCE, List.of("ddc"),
+        CODE, List.of("code1", "code2"),
+        ITEM_NUMBER, List.of("item number"),
+        EDITION_NUMBER, List.of("edition number"),
+        EDITION, List.of("edition")
+      ),
+      Set.of(ResourceTypeDictionary.CLASSIFICATION),
+      Map.of(
+        ASSIGNING_SOURCE, List.of(organization("assigning org"))
+      )
+    ).setLabel("ddcClassification");
   }
 
   private Map<PropertyDictionary, List<String>> createCommonConceptProperties(String prefix) {
