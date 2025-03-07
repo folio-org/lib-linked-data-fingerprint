@@ -561,7 +561,7 @@ public class TestUtil {
         ).entrySet().stream())
       .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     var form = getResource(removeNonFocusProperties(properties), Set.of(FORM), emptyMap())
-      .setLabel(properties.get(NAME).get(0));
+      .setLabel(properties.get(NAME).getFirst());
     var subForm = getResource(Map.of(NAME, properties.get(FORM_SUBDIVISION)), Set.of(FORM), emptyMap());
     var topic = getResource(Map.of(NAME, properties.get(GENERAL_SUBDIVISION)), Set.of(TOPIC), emptyMap());
     var temporal = getResource(Map.of(NAME, properties.get(CHRONOLOGICAL_SUBDIVISION)), Set.of(TEMPORAL),
@@ -571,7 +571,7 @@ public class TestUtil {
     pred2OutgoingResources.put(FOCUS, List.of(form));
     pred2OutgoingResources.put(SUB_FOCUS, List.of(subForm, topic, temporal, place));
     return getResource(properties, Set.of(CONCEPT, FORM), pred2OutgoingResources)
-      .setLabel(properties.get(NAME).get(0));
+      .setLabel(properties.get(NAME).getFirst());
   }
 
   private Resource createFamilyPersonConcept(String prefix, ResourceTypeDictionary type) {
@@ -587,7 +587,7 @@ public class TestUtil {
         ).entrySet().stream())
       .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     var familyPerson = getResource(removeNonFocusProperties(properties), Set.of(type), emptyMap())
-      .setLabel(properties.get(NAME).get(0));
+      .setLabel(properties.get(NAME).getFirst());
     var form = getResource(Map.of(NAME, properties.get(FORM_SUBDIVISION)), Set.of(FORM), emptyMap());
     var topic = getResource(Map.of(NAME, properties.get(GENERAL_SUBDIVISION)), Set.of(TOPIC), emptyMap());
     var temporal = getResource(Map.of(NAME, properties.get(CHRONOLOGICAL_SUBDIVISION)), Set.of(TEMPORAL),
@@ -597,7 +597,7 @@ public class TestUtil {
     pred2OutgoingResources.put(FOCUS, List.of(familyPerson));
     pred2OutgoingResources.put(SUB_FOCUS, List.of(form, topic, temporal, place));
     return getResource(properties, Set.of(CONCEPT, type), pred2OutgoingResources)
-      .setLabel(properties.get(NAME).get(0));
+      .setLabel(properties.get(NAME).getFirst());
   }
 
   private Resource createJurisdictionOrganizationConcept(String prefix, ResourceTypeDictionary type) {
@@ -611,7 +611,7 @@ public class TestUtil {
         ).entrySet().stream())
       .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     var jurisdictionOrganization = getResource(removeNonFocusProperties(properties), Set.of(type), emptyMap())
-      .setLabel(properties.get(NAME).get(0));
+      .setLabel(properties.get(NAME).getFirst());
     var form = getResource(Map.of(NAME, properties.get(FORM_SUBDIVISION)), Set.of(FORM), emptyMap());
     var topic = getResource(Map.of(NAME, properties.get(GENERAL_SUBDIVISION)), Set.of(TOPIC), emptyMap());
     var temporal = getResource(Map.of(NAME, properties.get(CHRONOLOGICAL_SUBDIVISION)), Set.of(TEMPORAL),
@@ -621,7 +621,7 @@ public class TestUtil {
     pred2OutgoingResources.put(FOCUS, List.of(jurisdictionOrganization));
     pred2OutgoingResources.put(SUB_FOCUS, List.of(form, topic, temporal, place));
     return getResource(properties, Set.of(CONCEPT, type), pred2OutgoingResources)
-      .setLabel(properties.get(NAME).get(0));
+      .setLabel(properties.get(NAME).getFirst());
   }
 
   private Resource createTopicConcept() {
@@ -635,7 +635,7 @@ public class TestUtil {
         ).entrySet().stream())
       .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     var topic = getResource(removeNonFocusProperties(properties), Set.of(TOPIC), emptyMap())
-      .setLabel(properties.get(NAME).get(0));
+      .setLabel(properties.get(NAME).getFirst());
     var form = getResource(Map.of(NAME, properties.get(FORM_SUBDIVISION)), Set.of(FORM), emptyMap());
     var subTopic = getResource(Map.of(NAME, properties.get(GENERAL_SUBDIVISION)), Set.of(TOPIC), emptyMap());
     var temporal = getResource(Map.of(NAME, properties.get(CHRONOLOGICAL_SUBDIVISION)), Set.of(TEMPORAL),
@@ -645,7 +645,7 @@ public class TestUtil {
     pred2OutgoingResources.put(FOCUS, List.of(topic));
     pred2OutgoingResources.put(SUB_FOCUS, List.of(form, subTopic, temporal, place));
     return getResource(properties, Set.of(CONCEPT, TOPIC), pred2OutgoingResources)
-      .setLabel(properties.get(NAME).get(0));
+      .setLabel(properties.get(NAME).getFirst());
   }
 
   private Resource createPlaceConcept() {
@@ -656,7 +656,7 @@ public class TestUtil {
         ).entrySet().stream())
       .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     var place = getResource(removeNonFocusProperties(properties), Set.of(PLACE), emptyMap())
-      .setLabel(properties.get(NAME).get(0));
+      .setLabel(properties.get(NAME).getFirst());
     var form = getResource(Map.of(NAME, properties.get(FORM_SUBDIVISION)), Set.of(FORM), emptyMap());
     var topic = getResource(Map.of(NAME, properties.get(GENERAL_SUBDIVISION)), Set.of(TOPIC), emptyMap());
     var temporal = getResource(Map.of(NAME, properties.get(CHRONOLOGICAL_SUBDIVISION)), Set.of(TEMPORAL),
@@ -666,7 +666,7 @@ public class TestUtil {
     pred2OutgoingResources.put(FOCUS, List.of(place));
     pred2OutgoingResources.put(SUB_FOCUS, List.of(form, topic, temporal, subPlace));
     return getResource(properties, Set.of(CONCEPT, PLACE), pred2OutgoingResources)
-      .setLabel(properties.get(NAME).get(0));
+      .setLabel(properties.get(NAME).getFirst());
   }
 
   public static Resource lcClassification() {
