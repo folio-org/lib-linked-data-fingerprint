@@ -32,7 +32,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
     <commons-io.version>2.18.0</commons-io.version>
-    <lib-linked-data-dictionary.version>1.0.1-SNAPSHOT</lib-linked-data-dictionary.version>
+    <lib-linked-data-dictionary.version>1.0.1</lib-linked-data-dictionary.version>
     <checkstyle.version>10.21.4</checkstyle.version>
 
     <versions-maven-plugin.version>2.18.0</versions-maven-plugin.version>
