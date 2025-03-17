@@ -54,7 +54,6 @@ import static org.folio.ld.dictionary.PropertyDictionary.EDITION_NUMBER;
 import static org.folio.ld.dictionary.PropertyDictionary.ENTITY_AND_ATTRIBUTE_INFORMATION;
 import static org.folio.ld.dictionary.PropertyDictionary.EQUIVALENT;
 import static org.folio.ld.dictionary.PropertyDictionary.EXHIBITIONS_NOTE;
-import static org.folio.ld.dictionary.PropertyDictionary.EXTENT;
 import static org.folio.ld.dictionary.PropertyDictionary.FIELD_LINK;
 import static org.folio.ld.dictionary.PropertyDictionary.FORMER_TITLE_NOTE;
 import static org.folio.ld.dictionary.PropertyDictionary.FORM_SUBDIVISION;
@@ -79,6 +78,7 @@ import static org.folio.ld.dictionary.PropertyDictionary.LOCATION_OF_EVENT;
 import static org.folio.ld.dictionary.PropertyDictionary.LOCATION_OF_ORIGINALS_DUPLICATES;
 import static org.folio.ld.dictionary.PropertyDictionary.LOCATION_OF_OTHER_ARCHIVAL_MATERIAL;
 import static org.folio.ld.dictionary.PropertyDictionary.MAIN_TITLE;
+import static org.folio.ld.dictionary.PropertyDictionary.MATERIALS_SPEC;
 import static org.folio.ld.dictionary.PropertyDictionary.MATERIALS_SPECIFIED;
 import static org.folio.ld.dictionary.PropertyDictionary.MISC_INFO;
 import static org.folio.ld.dictionary.PropertyDictionary.NAME;
@@ -120,6 +120,7 @@ import static org.folio.ld.dictionary.ResourceTypeDictionary.CATEGORY_SET;
 import static org.folio.ld.dictionary.ResourceTypeDictionary.CONCEPT;
 import static org.folio.ld.dictionary.ResourceTypeDictionary.COPYRIGHT_EVENT;
 import static org.folio.ld.dictionary.ResourceTypeDictionary.DISSERTATION;
+import static org.folio.ld.dictionary.ResourceTypeDictionary.EXTENT;
 import static org.folio.ld.dictionary.ResourceTypeDictionary.FAMILY;
 import static org.folio.ld.dictionary.ResourceTypeDictionary.FORM;
 import static org.folio.ld.dictionary.ResourceTypeDictionary.IDENTIFIER;
@@ -333,7 +334,6 @@ public class TestUtil {
     var instance = getResource(
       Map.ofEntries(
         entry(STATEMENT_OF_RESPONSIBILITY, List.of("statement of responsibility")),
-        entry(EXTENT, List.of("extent")),
         entry(DIMENSIONS, List.of("dimensions")),
         entry(EDITION, List.of("Edition Statement Edition statement2")),
         entry(PROJECTED_PROVISION_DATE, List.of("projectedProvisionDate")),
@@ -894,6 +894,18 @@ public class TestUtil {
       Set.of(DISSERTATION),
       Map.of(GRANTING_INSTITUTION, List.of(organization("Dissertation granting institution")))
     ).setLabel("Dissertation label");
+  }
+
+  public static Resource extent() {
+    return getResource(
+      Map.of(
+        LABEL, List.of("Extent label"),
+        MATERIALS_SPEC, List.of("Extent materials spec"),
+        NOTE, List.of("Extent note")
+      ),
+      Set.of(EXTENT),
+      emptyMap()
+    ).setLabel("Extent label");
   }
 
   public static Resource getResource(Map<PropertyDictionary, List<String>> propertiesDic,

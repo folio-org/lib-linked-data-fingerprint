@@ -5,6 +5,7 @@ import static org.folio.ld.fingerprint.test.TestUtil.category;
 import static org.folio.ld.fingerprint.test.TestUtil.categorySet;
 import static org.folio.ld.fingerprint.test.TestUtil.ddcClassification;
 import static org.folio.ld.fingerprint.test.TestUtil.dissertation;
+import static org.folio.ld.fingerprint.test.TestUtil.extent;
 import static org.folio.ld.fingerprint.test.TestUtil.id_isbn;
 import static org.folio.ld.fingerprint.test.TestUtil.id_lccn;
 import static org.folio.ld.fingerprint.test.TestUtil.instance;
@@ -55,7 +56,8 @@ class FingerprintServiceIT {
       Arguments.of(providerEvent("providerEvent"), "providerEvent.json"),
       Arguments.of(providerPlace("providerEvent"), "providerPlace.json"),
       Arguments.of(status("some"), "status.json"),
-      Arguments.of(work(), "work.json")
+      Arguments.of(work(), "work.json"),
+      Arguments.of(extent(), "extent.json")
     );
   }
 
