@@ -255,3 +255,7 @@ rules:
     edges:
       - predicate: STATUS
         label: true
+  - types: EXTENT
+    properties:
+      - LABEL
+      - MATERIALS_SPECIFIED
