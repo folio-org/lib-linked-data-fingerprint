@@ -78,7 +78,6 @@ import static org.folio.ld.dictionary.PropertyDictionary.LOCATION_OF_EVENT;
 import static org.folio.ld.dictionary.PropertyDictionary.LOCATION_OF_ORIGINALS_DUPLICATES;
 import static org.folio.ld.dictionary.PropertyDictionary.LOCATION_OF_OTHER_ARCHIVAL_MATERIAL;
 import static org.folio.ld.dictionary.PropertyDictionary.MAIN_TITLE;
-import static org.folio.ld.dictionary.PropertyDictionary.MATERIALS_SPEC;
 import static org.folio.ld.dictionary.PropertyDictionary.MATERIALS_SPECIFIED;
 import static org.folio.ld.dictionary.PropertyDictionary.MISC_INFO;
 import static org.folio.ld.dictionary.PropertyDictionary.NAME;
@@ -900,7 +899,7 @@ public class TestUtil {
     return getResource(
       Map.of(
         LABEL, List.of("Extent label"),
-        MATERIALS_SPEC, List.of("Extent materials spec"),
+        MATERIALS_SPECIFIED, List.of("Extent materials spec"),
         NOTE, List.of("Extent note")
       ),
       Set.of(EXTENT),

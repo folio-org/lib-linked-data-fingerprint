@@ -258,4 +258,4 @@ rules:
   - types: EXTENT
     properties:
       - LABEL
-      - MATERIALS_SPEC
+      - MATERIALS_SPECIFIED
