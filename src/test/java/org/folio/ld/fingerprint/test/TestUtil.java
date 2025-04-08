@@ -389,7 +389,7 @@ public class TestUtil {
       Map.of(
         NAME, List.of("United States"),
         GEOGRAPHIC_AREA_CODE, List.of("n-us"),
-        GEOGRAPHIC_COVERAGE, List.of("https://id.loc.gov/vocabulary/geographicAreas/n-us")
+        GEOGRAPHIC_COVERAGE, List.of("http://id.loc.gov/vocabulary/geographicAreas/n-us")
       ),
       Set.of(PLACE),
       emptyMap()
