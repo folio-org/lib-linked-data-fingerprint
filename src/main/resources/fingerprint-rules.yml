@@ -266,6 +266,10 @@ rules:
   - types: SERIES
     properties:
       - NAME
+    edges:
+      - predicate: MAP
+        edgeProperties:
+          NAME: http://bibfra.me/vocab/marc/issn
   - types: INSTANCE, SERIES
     properties:
       - NAME
