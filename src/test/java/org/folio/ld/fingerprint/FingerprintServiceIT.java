@@ -1,6 +1,8 @@
 package org.folio.ld.fingerprint;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.folio.ld.dictionary.ResourceTypeDictionary.BOOKS;
+import static org.folio.ld.dictionary.ResourceTypeDictionary.CONTINUING_RESOURCES;
 import static org.folio.ld.fingerprint.test.TestUtil.category;
 import static org.folio.ld.fingerprint.test.TestUtil.categorySet;
 import static org.folio.ld.fingerprint.test.TestUtil.ddcClassification;
@@ -56,7 +58,8 @@ class FingerprintServiceIT {
       Arguments.of(providerEvent("providerEvent"), "providerEvent.json"),
       Arguments.of(providerPlace("providerEvent"), "providerPlace.json"),
       Arguments.of(status("some"), "status.json"),
-      Arguments.of(work(), "work.json"),
+      Arguments.of(work(BOOKS), "work_book.json"),
+      Arguments.of(work(CONTINUING_RESOURCES), "work_serial.json"),
       Arguments.of(extent(), "extent.json")
     );
   }
