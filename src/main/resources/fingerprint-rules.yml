@@ -1,6 +1,10 @@
 rules:
   - types: WORK
+    partialTypesMatch: true
     label: true
+    properties:
+      - NAME
+      - VOLUME
     edges:
       - predicate: CREATOR
         label: true
@@ -259,10 +263,6 @@ rules:
     properties:
       - LABEL
       - MATERIALS_SPECIFIED
-  - types: WORK, SERIES
-    properties:
-      - NAME
-      - VOLUME
   - types: SERIES
     properties:
       - NAME
