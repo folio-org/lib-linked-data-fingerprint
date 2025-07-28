@@ -1,5 +1,6 @@
 package org.folio.ld.fingerprint.service;
 
+import static java.lang.Boolean.TRUE;
 import static java.util.Comparator.comparing;
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
@@ -50,7 +51,7 @@ public class FingerprintServiceImpl implements FingerprintService {
   private Optional<FingerprintRule> getPartialMatchRule(Resource resource) {
     return rules.getRules()
       .stream()
-      .filter(FingerprintRule::partialTypesMatch)
+      .filter(fingerprintRule -> TRUE.equals(fingerprintRule.partialTypesMatch()))
       .filter(rule -> resource.getTypeNames().containsAll(rule.types()))
       .findFirst();
   }

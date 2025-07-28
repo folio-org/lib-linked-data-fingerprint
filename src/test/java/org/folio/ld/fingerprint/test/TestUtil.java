@@ -210,14 +210,7 @@ public class TestUtil {
       emptyMap()
     ).setLabel("supplementaryContent label");
 
-    var accessLocation = getResource(
-      Map.of(
-        LINK, List.of("access location URI"),
-        NOTE, List.of("access location note")
-      ),
-      Set.of(ANNOTATION),
-      emptyMap()
-    ).setLabel("access location URI");
+    var accessLocation = annotation("access location");
 
     var lccnCancelled = getResource(
       Map.of(NAME, List.of("88888888")),
@@ -383,6 +376,17 @@ public class TestUtil {
         .setSrsId("43d58061-decf-4d74-9747-0e1c368e861b")
       );
     return instance.setLabel("Instance label");
+  }
+
+  public static Resource annotation(String prefix) {
+    return getResource(
+      Map.of(
+        LINK, List.of(prefix + " URI"),
+        NOTE, List.of(prefix + " note")
+      ),
+      Set.of(ANNOTATION),
+      emptyMap()
+    ).setLabel(prefix + " URI");
   }
 
   public static Resource work(ResourceTypeDictionary subType) {
