@@ -114,6 +114,7 @@ import static org.folio.ld.dictionary.PropertyDictionary.TYPE_OF_REPORT;
 import static org.folio.ld.dictionary.PropertyDictionary.VARIANT_TYPE;
 import static org.folio.ld.dictionary.PropertyDictionary.WITH_NOTE;
 import static org.folio.ld.dictionary.ResourceTypeDictionary.ANNOTATION;
+import static org.folio.ld.dictionary.ResourceTypeDictionary.BOOKS;
 import static org.folio.ld.dictionary.ResourceTypeDictionary.CATEGORY;
 import static org.folio.ld.dictionary.ResourceTypeDictionary.CATEGORY_SET;
 import static org.folio.ld.dictionary.ResourceTypeDictionary.CONCEPT;
@@ -209,14 +210,7 @@ public class TestUtil {
       emptyMap()
     ).setLabel("supplementaryContent label");
 
-    var accessLocation = getResource(
-      Map.of(
-        LINK, List.of("access location URI"),
-        NOTE, List.of("access location note")
-      ),
-      Set.of(ANNOTATION),
-      emptyMap()
-    ).setLabel("access location URI");
+    var accessLocation = annotation("access location");
 
     var lccnCancelled = getResource(
       Map.of(NAME, List.of("88888888")),
@@ -328,7 +322,7 @@ public class TestUtil {
     pred2OutgoingResources.put(MEDIA, List.of(category("MEDIA")));
     pred2OutgoingResources.put(CARRIER, List.of(carrier));
     pred2OutgoingResources.put(COPYRIGHT, List.of(copyrightEvent));
-    pred2OutgoingResources.put(INSTANTIATES, List.of(work()));
+    pred2OutgoingResources.put(INSTANTIATES, List.of(work(BOOKS)));
 
     var instance = getResource(
       Map.ofEntries(
@@ -384,7 +378,18 @@ public class TestUtil {
     return instance.setLabel("Instance label");
   }
 
-  public static Resource work() {
+  public static Resource annotation(String prefix) {
+    return getResource(
+      Map.of(
+        LINK, List.of(prefix + " URI"),
+        NOTE, List.of(prefix + " note")
+      ),
+      Set.of(ANNOTATION),
+      emptyMap()
+    ).setLabel(prefix + " URI");
+  }
+
+  public static Resource work(ResourceTypeDictionary subType) {
     var place = getResource(
       Map.of(
         NAME, List.of("United States"),
@@ -537,7 +542,7 @@ public class TestUtil {
         DATE_START, List.of("2023"),
         DATE_END, List.of("2024")
       ),
-      Set.of(WORK),
+      Set.of(WORK, subType),
       pred2OutgoingResources
     ).setLabel("Work: label");
   }

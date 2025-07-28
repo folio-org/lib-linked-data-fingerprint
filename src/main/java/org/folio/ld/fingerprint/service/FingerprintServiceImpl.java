@@ -1,5 +1,6 @@
 package org.folio.ld.fingerprint.service;
 
+import static java.lang.Boolean.TRUE;
 import static java.util.Comparator.comparing;
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
@@ -34,12 +35,25 @@ public class FingerprintServiceImpl implements FingerprintService {
   @SneakyThrows
   @Override
   public String fingerprint(Resource resource) {
-    var matchedRule = rules.getRules()
+    var matchedRule = getExactMatchRule(resource)
+      .or(() -> getPartialMatchRule(resource));
+    var fingerprintMap = getFingerprint(resource, matchedRule.orElse(null));
+    return mapper.writeValueAsString(fingerprintMap);
+  }
+
+  private Optional<FingerprintRule> getExactMatchRule(Resource resource) {
+    return rules.getRules()
       .stream()
       .filter(rule -> resource.getTypeNames().equals(rule.types()))
       .findFirst();
-    var fingerprintMap = getFingerprint(resource, matchedRule.orElse(null));
-    return mapper.writeValueAsString(fingerprintMap);
+  }
+
+  private Optional<FingerprintRule> getPartialMatchRule(Resource resource) {
+    return rules.getRules()
+      .stream()
+      .filter(fingerprintRule -> TRUE.equals(fingerprintRule.partialTypesMatch()))
+      .filter(rule -> resource.getTypeNames().containsAll(rule.types()))
+      .findFirst();
   }
 
   private List<FingerprintEntry> getFingerprint(Resource resource, FingerprintRule rule) {

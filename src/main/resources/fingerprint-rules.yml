@@ -1,5 +1,6 @@
 rules:
   - types: WORK
+    partialTypesMatch: true
     label: true
     edges:
       - predicate: CREATOR
@@ -50,7 +51,7 @@ rules:
     edges:
       - predicate: GRANTING_INSTITUTION
         edgeProperties:
-            NAME: http://bibfra.me/vocab/marc/grantingInstitution
+          NAME: http://bibfra.me/vocab/marc/grantingInstitution
   - types: ID_LCCN, IDENTIFIER
     properties:
       - NAME
