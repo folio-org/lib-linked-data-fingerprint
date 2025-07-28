@@ -34,18 +34,25 @@ public class FingerprintServiceImpl implements FingerprintService {
   @SneakyThrows
   @Override
   public String fingerprint(Resource resource) {
-    var matchedRule = rules.getRules()
-      .stream()
-      .filter(rule -> typesMatch(resource, rule))
-      .findFirst();
+    var matchedRule = getExactMatchRule(resource)
+      .or(() -> getPartialMatchRule(resource));
     var fingerprintMap = getFingerprint(resource, matchedRule.orElse(null));
     return mapper.writeValueAsString(fingerprintMap);
   }
 
-  private static boolean typesMatch(Resource resource, FingerprintRule rule) {
-    return Boolean.TRUE == rule.partialTypesMatch()
-      ? resource.getTypeNames().containsAll(rule.types())
-      : resource.getTypeNames().equals(rule.types());
+  private Optional<FingerprintRule> getExactMatchRule(Resource resource) {
+    return rules.getRules()
+      .stream()
+      .filter(rule -> resource.getTypeNames().equals(rule.types()))
+      .findFirst();
+  }
+
+  private Optional<FingerprintRule> getPartialMatchRule(Resource resource) {
+    return rules.getRules()
+      .stream()
+      .filter(FingerprintRule::partialTypesMatch)
+      .filter(rule -> resource.getTypeNames().containsAll(rule.types()))
+      .findFirst();
   }
 
   private List<FingerprintEntry> getFingerprint(Resource resource, FingerprintRule rule) {
