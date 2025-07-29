@@ -58,7 +58,7 @@ rules:
     edges:
       - predicate: STATUS
         label: true
-  - types: ISSN, IDENTIFIER
+  - types: ID_ISSN, IDENTIFIER
     properties:
       - NAME
     edges:
