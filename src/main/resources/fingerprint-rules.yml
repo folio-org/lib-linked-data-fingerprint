@@ -58,6 +58,12 @@ rules:
     edges:
       - predicate: STATUS
         label: true
+  - types: ID_ISSN, IDENTIFIER
+    properties:
+      - NAME
+    edges:
+      - predicate: STATUS
+        label: true
   - types: ID_LOCAL, IDENTIFIER
     properties:
       - LOCAL_ID_VALUE
@@ -278,6 +284,3 @@ rules:
       - predicate: MAP
         edgeProperties:
           NAME: http://bibfra.me/vocab/marc/issn
-  - types: IDENTIFIER, ISSN
-    properties:
-      - NAME
