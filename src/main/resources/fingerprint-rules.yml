@@ -284,3 +284,15 @@ rules:
       - predicate: MAP
         edgeProperties:
           NAME: http://bibfra.me/vocab/marc/issn
+  - types: ANNOTATION
+    properties:
+      - CONTROL_NUMBER
+      - CREATED_DATE
+      - CATALOGING_AGENCY
+      - TRANSCRIBING_AGENCY
+      - MODIFYING_AGENCY
+      - LINK
+    edges:
+      - predicate: CATALOGING_LANGUAGE
+        edgeProperties:
+          CODE: http://bibfra.me/vocab/lite/catalogingLanguage

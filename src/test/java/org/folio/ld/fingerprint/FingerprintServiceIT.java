@@ -3,6 +3,7 @@ package org.folio.ld.fingerprint;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.folio.ld.dictionary.ResourceTypeDictionary.BOOKS;
 import static org.folio.ld.dictionary.ResourceTypeDictionary.CONTINUING_RESOURCES;
+import static org.folio.ld.fingerprint.test.TestUtil.adminMetadataAnnotation;
 import static org.folio.ld.fingerprint.test.TestUtil.annotation;
 import static org.folio.ld.fingerprint.test.TestUtil.category;
 import static org.folio.ld.fingerprint.test.TestUtil.categorySet;
@@ -43,6 +44,7 @@ class FingerprintServiceIT {
 
   private static Stream<Arguments> provideResourceAndExpectedFingerprint() {
     return Stream.of(
+      Arguments.of(adminMetadataAnnotation(), "adminMetadataAnnotation.json"),
       Arguments.of(annotation("annotation"), "annotation.json"),
       Arguments.of(category("category"), "category.json"),
       Arguments.of(languageCategory(), "languageCategory.json"),

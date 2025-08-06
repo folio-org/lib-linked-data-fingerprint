@@ -5,6 +5,7 @@ import static java.util.Map.entry;
 import static org.folio.ld.dictionary.PredicateDictionary.ACCESS_LOCATION;
 import static org.folio.ld.dictionary.PredicateDictionary.ASSIGNING_SOURCE;
 import static org.folio.ld.dictionary.PredicateDictionary.CARRIER;
+import static org.folio.ld.dictionary.PredicateDictionary.CATALOGING_LANGUAGE;
 import static org.folio.ld.dictionary.PredicateDictionary.CLASSIFICATION;
 import static org.folio.ld.dictionary.PredicateDictionary.CONTENT;
 import static org.folio.ld.dictionary.PredicateDictionary.CONTRIBUTOR;
@@ -32,11 +33,14 @@ import static org.folio.ld.dictionary.PropertyDictionary.ADDITIONAL_PHYSICAL_FOR
 import static org.folio.ld.dictionary.PropertyDictionary.AFFILIATION;
 import static org.folio.ld.dictionary.PropertyDictionary.ATTRIBUTION;
 import static org.folio.ld.dictionary.PropertyDictionary.AUTHORITY_LINK;
+import static org.folio.ld.dictionary.PropertyDictionary.CATALOGING_AGENCY;
 import static org.folio.ld.dictionary.PropertyDictionary.CHRONOLOGICAL_SUBDIVISION;
 import static org.folio.ld.dictionary.PropertyDictionary.CITATION_COVERAGE;
 import static org.folio.ld.dictionary.PropertyDictionary.CODE;
 import static org.folio.ld.dictionary.PropertyDictionary.COMPUTER_DATA_NOTE;
 import static org.folio.ld.dictionary.PropertyDictionary.CONTROL_FIELD;
+import static org.folio.ld.dictionary.PropertyDictionary.CONTROL_NUMBER;
+import static org.folio.ld.dictionary.PropertyDictionary.CREATED_DATE;
 import static org.folio.ld.dictionary.PropertyDictionary.CREDITS_NOTE;
 import static org.folio.ld.dictionary.PropertyDictionary.DATE;
 import static org.folio.ld.dictionary.PropertyDictionary.DATES_OF_PUBLICATION_NOTE;
@@ -80,6 +84,7 @@ import static org.folio.ld.dictionary.PropertyDictionary.LOCATION_OF_OTHER_ARCHI
 import static org.folio.ld.dictionary.PropertyDictionary.MAIN_TITLE;
 import static org.folio.ld.dictionary.PropertyDictionary.MATERIALS_SPECIFIED;
 import static org.folio.ld.dictionary.PropertyDictionary.MISC_INFO;
+import static org.folio.ld.dictionary.PropertyDictionary.MODIFYING_AGENCY;
 import static org.folio.ld.dictionary.PropertyDictionary.NAME;
 import static org.folio.ld.dictionary.PropertyDictionary.NAME_ALTERNATIVE;
 import static org.folio.ld.dictionary.PropertyDictionary.NON_SORT_NUM;
@@ -110,6 +115,7 @@ import static org.folio.ld.dictionary.PropertyDictionary.TABLE_OF_CONTENTS;
 import static org.folio.ld.dictionary.PropertyDictionary.TARGET_AUDIENCE;
 import static org.folio.ld.dictionary.PropertyDictionary.TERM;
 import static org.folio.ld.dictionary.PropertyDictionary.TITLES;
+import static org.folio.ld.dictionary.PropertyDictionary.TRANSCRIBING_AGENCY;
 import static org.folio.ld.dictionary.PropertyDictionary.TYPE_OF_REPORT;
 import static org.folio.ld.dictionary.PropertyDictionary.VARIANT_TYPE;
 import static org.folio.ld.dictionary.PropertyDictionary.WITH_NOTE;
@@ -911,6 +917,30 @@ public class TestUtil {
       emptyMap()
     ).setLabel("Extent label");
   }
+
+  public static Resource adminMetadataAnnotation() {
+    var catalogingLanguage = getResource(
+      Map.of(
+        CODE, List.of("eng"),
+        LINK, List.of("http://id.loc.gov/vocabulary/languages/eng")
+      ),
+      Set.of(LANGUAGE_CATEGORY),
+      emptyMap()
+    ).setLabel("eng");
+
+    return getResource(
+      Map.of(
+        CONTROL_NUMBER, List.of("1234567890"),
+        CREATED_DATE, List.of("2025-08-05"),
+        CATALOGING_AGENCY, List.of("DLC"),
+        TRANSCRIBING_AGENCY, List.of("NH"),
+        MODIFYING_AGENCY, List.of("AX")
+      ),
+      Set.of(ANNOTATION),
+      Map.of(CATALOGING_LANGUAGE, List.of(catalogingLanguage))
+    ).setLabel("1234567890");
+  }
+
 
   public static Resource getResource(Map<PropertyDictionary, List<String>> propertiesDic,
                                      Set<ResourceTypeDictionary> types,
