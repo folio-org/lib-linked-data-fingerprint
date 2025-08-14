@@ -74,9 +74,9 @@ rules:
     edges:
       - predicate: STATUS
         label: true
-  - types: ID_EAN, IDENTIFIER
+  - types: ID_IAN, IDENTIFIER
     properties:
-      - EAN_VALUE
+      - NAME
       - QUALIFIER
   - types: ID_UNKNOWN, IDENTIFIER
     properties:
