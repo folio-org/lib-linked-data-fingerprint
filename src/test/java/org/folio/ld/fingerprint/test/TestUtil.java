@@ -96,7 +96,6 @@ import static org.folio.ld.dictionary.PropertyDictionary.PART_NUMBER;
 import static org.folio.ld.dictionary.PropertyDictionary.PHYSICAL_DESCRIPTION;
 import static org.folio.ld.dictionary.PropertyDictionary.PROJECTED_PROVISION_DATE;
 import static org.folio.ld.dictionary.PropertyDictionary.PROVIDER_DATE;
-import static org.folio.ld.dictionary.PropertyDictionary.PUBLICATION_FREQUENCY;
 import static org.folio.ld.dictionary.PropertyDictionary.QUALIFIER;
 import static org.folio.ld.dictionary.PropertyDictionary.RELATED_PARTS;
 import static org.folio.ld.dictionary.PropertyDictionary.RELATOR_CODE;
@@ -366,7 +365,6 @@ public class TestUtil {
           List.of("entry, statement, publication, description, series statement, key title, details, note, title")),
         entry(PARTICIPANT_NOTE, List.of("participant note")),
         entry(PHYSICAL_DESCRIPTION, List.of("extent, details")),
-        entry(PUBLICATION_FREQUENCY, List.of("frequency, date")),
         entry(RELATED_PARTS, List.of("custodian, address, country, title, provenance, note")),
         entry(REPRODUCTION_NOTE, List.of("type, place, agency, date, description, statement, note")),
         entry(SYSTEM_DETAILS, List.of("note, text, uri")),
