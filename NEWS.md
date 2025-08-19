@@ -5,6 +5,7 @@
 - Partial types rule selection for WORK [MODLD-805](https://folio-org.atlassian.net/browse/MODLD-805)
 - Update fingerprinting rule for ISSN to include Status [MODLD-798](https://folio-org.atlassian.net/browse/MODLD-798)
 - Replace ID_EAN with ID_IAN. Remove property EAN_VALUE. [MODLD-810](https://folio-org.atlassian.net/browse/MODLD-810)
+- PUBLICATION_FREQUENCY property removed [MODLD-817](https://folio-org.atlassian.net/browse/MODLD-817)
 
 ## 1.0.1 (03-12-2025)
 - Initial release
