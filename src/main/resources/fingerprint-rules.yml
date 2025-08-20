@@ -78,10 +78,16 @@ rules:
     properties:
       - NAME
       - QUALIFIER
+    edges:
+      - predicate: STATUS
+        label: true
   - types: ID_UNKNOWN, IDENTIFIER
     properties:
       - NAME
       - QUALIFIER
+    edges:
+      - predicate: STATUS
+        label: true
   - types: STATUS
     properties:
       - LABEL

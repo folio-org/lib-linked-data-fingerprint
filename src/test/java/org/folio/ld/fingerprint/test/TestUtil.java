@@ -810,6 +810,25 @@ public class TestUtil {
     ).setLabel("lccn value");
   }
 
+  public static Resource id_ian() {
+    return getResource(
+      Map.of(
+        NAME, List.of("ian value"),
+        QUALIFIER, List.of("ian qualifier")
+      ),
+      Set.of(IDENTIFIER, ID_IAN),
+      Map.of(STATUS, List.of(status("ian")))
+    ).setLabel("ian value");
+  }
+
+  public static Resource id_unknown() {
+    return getResource(
+      Map.of(NAME, List.of("unknown id value")),
+      Set.of(IDENTIFIER, ID_UNKNOWN),
+      Map.of(STATUS, List.of(status("unknown")))
+    ).setLabel("unknown id value");
+  }
+
   public static Resource id_isbn() {
     return getResource(
       Map.of(NAME, List.of("isbn value")),
