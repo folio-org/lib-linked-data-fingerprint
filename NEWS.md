@@ -6,6 +6,7 @@
 - Update fingerprinting rule for ISSN to include Status [MODLD-798](https://folio-org.atlassian.net/browse/MODLD-798)
 - Replace ID_EAN with ID_IAN. Remove property EAN_VALUE. [MODLD-810](https://folio-org.atlassian.net/browse/MODLD-810)
 - PUBLICATION_FREQUENCY property removed [MODLD-817](https://folio-org.atlassian.net/browse/MODLD-817)
+- Update the fingerprint rules for ID_UNKNOWN and ID_IAN [MODLD-845](https://folio-org.atlassian.net/browse/MODLD-845)
 
 ## 1.0.1 (03-12-2025)
 - Initial release
