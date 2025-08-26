@@ -7,7 +7,10 @@ import static org.folio.ld.fingerprint.test.TestUtil.adminMetadataAnnotation;
 import static org.folio.ld.fingerprint.test.TestUtil.annotation;
 import static org.folio.ld.fingerprint.test.TestUtil.category;
 import static org.folio.ld.fingerprint.test.TestUtil.categorySet;
-import static org.folio.ld.fingerprint.test.TestUtil.ddcClassification;
+import static org.folio.ld.fingerprint.test.TestUtil.classificationDdc;
+import static org.folio.ld.fingerprint.test.TestUtil.classificationLc;
+import static org.folio.ld.fingerprint.test.TestUtil.conceptMeeting;
+import static org.folio.ld.fingerprint.test.TestUtil.conceptTemporal;
 import static org.folio.ld.fingerprint.test.TestUtil.dissertation;
 import static org.folio.ld.fingerprint.test.TestUtil.extent;
 import static org.folio.ld.fingerprint.test.TestUtil.id_ian;
@@ -15,16 +18,14 @@ import static org.folio.ld.fingerprint.test.TestUtil.id_isbn;
 import static org.folio.ld.fingerprint.test.TestUtil.id_lccn;
 import static org.folio.ld.fingerprint.test.TestUtil.id_unknown;
 import static org.folio.ld.fingerprint.test.TestUtil.instance;
-import static org.folio.ld.fingerprint.test.TestUtil.instanceTitle;
 import static org.folio.ld.fingerprint.test.TestUtil.languageCategory;
-import static org.folio.ld.fingerprint.test.TestUtil.lcClassification;
 import static org.folio.ld.fingerprint.test.TestUtil.loadResourceAsString;
-import static org.folio.ld.fingerprint.test.TestUtil.meetingConcept;
-import static org.folio.ld.fingerprint.test.TestUtil.parallelTitle;
 import static org.folio.ld.fingerprint.test.TestUtil.providerEvent;
 import static org.folio.ld.fingerprint.test.TestUtil.providerPlace;
 import static org.folio.ld.fingerprint.test.TestUtil.status;
-import static org.folio.ld.fingerprint.test.TestUtil.variantTitle;
+import static org.folio.ld.fingerprint.test.TestUtil.title;
+import static org.folio.ld.fingerprint.test.TestUtil.titleParallel;
+import static org.folio.ld.fingerprint.test.TestUtil.titleVariant;
 import static org.folio.ld.fingerprint.test.TestUtil.work;
 
 import java.util.stream.Stream;
@@ -49,26 +50,27 @@ class FingerprintServiceIT {
       Arguments.of(adminMetadataAnnotation(), "adminMetadataAnnotation.json"),
       Arguments.of(annotation("annotation"), "annotation.json"),
       Arguments.of(category("category"), "category.json"),
-      Arguments.of(languageCategory(), "languageCategory.json"),
       Arguments.of(categorySet(), "categorySet.json"),
+      Arguments.of(classificationDdc(), "ddcClassification.json"),
+      Arguments.of(classificationLc(), "lcClassification.json"),
+      Arguments.of(conceptMeeting(), "meetingConcept.json"),
+      Arguments.of(conceptTemporal(), "temporalConcept.json"),
       Arguments.of(dissertation(), "dissertation.json"),
-      Arguments.of(meetingConcept(), "meetingConcept.json"),
+      Arguments.of(extent(), "extent.json"),
       Arguments.of(id_ian(), "id_ian.json"),
-      Arguments.of(id_lccn(), "id_lccn.json"),
       Arguments.of(id_isbn(), "id_isbn.json"),
+      Arguments.of(id_lccn(), "id_lccn.json"),
       Arguments.of(id_unknown(), "id_unknown.json"),
       Arguments.of(instance(), "instance.json"),
-      Arguments.of(instanceTitle(), "instanceTitle.json"),
-      Arguments.of(parallelTitle(), "parallelTitle.json"),
-      Arguments.of(variantTitle(), "variantTitle.json"),
-      Arguments.of(lcClassification(), "lcClassification.json"),
-      Arguments.of(ddcClassification(), "ddcClassification.json"),
+      Arguments.of(languageCategory(), "languageCategory.json"),
       Arguments.of(providerEvent("providerEvent"), "providerEvent.json"),
       Arguments.of(providerPlace("providerEvent"), "providerPlace.json"),
       Arguments.of(status("some"), "status.json"),
+      Arguments.of(title(), "instanceTitle.json"),
+      Arguments.of(titleParallel(), "parallelTitle.json"),
+      Arguments.of(titleVariant(), "variantTitle.json"),
       Arguments.of(work(BOOKS), "work_book.json"),
-      Arguments.of(work(CONTINUING_RESOURCES), "work_serial.json"),
-      Arguments.of(extent(), "extent.json")
+      Arguments.of(work(CONTINUING_RESOURCES), "work_serial.json")
     );
   }
 
