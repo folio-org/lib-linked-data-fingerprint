@@ -313,7 +313,7 @@ public class TestUtil {
 
     var pred2OutgoingResources = new LinkedHashMap<PredicateDictionary, List<Resource>>();
     pred2OutgoingResources.put(TITLE,
-      List.of(instanceTitle(), parallelTitle(), variantTitle(), instanceTitle2, instanceTitle3));
+      List.of(title(), titleParallel(), titleVariant(), instanceTitle2, instanceTitle3));
     pred2OutgoingResources.put(PE_PRODUCTION, List.of(production));
     pred2OutgoingResources.put(PE_PUBLICATION, List.of(publication));
     pred2OutgoingResources.put(PE_DISTRIBUTION, List.of(distribution));
@@ -521,7 +521,7 @@ public class TestUtil {
 
     var pred2OutgoingResources = new LinkedHashMap<PredicateDictionary, List<Resource>>();
     pred2OutgoingResources.put(PredicateDictionary.GEOGRAPHIC_COVERAGE, List.of(place));
-    pred2OutgoingResources.put(CLASSIFICATION, List.of(lcClassification(), deweyClassification));
+    pred2OutgoingResources.put(CLASSIFICATION, List.of(classificationLc(), deweyClassification));
     pred2OutgoingResources.put(CREATOR, List.of(meetingCreator, personCreator, organizationCreator, familyCreator,
       jurisdictionCreator));
     pred2OutgoingResources.put(CONTRIBUTOR, List.of(meetingContributor, personContributor, organizationContributor,
@@ -676,7 +676,7 @@ public class TestUtil {
       .setLabel(properties.get(NAME).getFirst());
   }
 
-  public static Resource lcClassification() {
+  public static Resource classificationLc() {
     return getResource(
       Map.of(
         SOURCE, List.of("lc"),
@@ -691,7 +691,7 @@ public class TestUtil {
     ).setLabel("lcClassification");
   }
 
-  public static Resource ddcClassification() {
+  public static Resource classificationDdc() {
     return getResource(
       Map.of(
         SOURCE, List.of("ddc"),
@@ -740,7 +740,7 @@ public class TestUtil {
       .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
   }
 
-  public static Resource instanceTitle() {
+  public static Resource title() {
     return getResource(Map.of(
         PART_NAME, List.of("Instance: partName"),
         PART_NUMBER, List.of("Instance: partNumber"),
@@ -754,7 +754,7 @@ public class TestUtil {
     ).setLabel("Instance: mainTitle");
   }
 
-  public static Resource parallelTitle() {
+  public static Resource titleParallel() {
     return getResource(
       Map.of(
         PART_NAME, List.of("Parallel-PartName"),
@@ -769,7 +769,7 @@ public class TestUtil {
     ).setLabel("Parallel-MainTitle");
   }
 
-  public static Resource variantTitle() {
+  public static Resource titleVariant() {
     return getResource(
       Map.of(
         PART_NAME, List.of("Variant-PartName"),
@@ -785,7 +785,7 @@ public class TestUtil {
     ).setLabel("Variant-MainTitle");
   }
 
-  public static Resource meetingConcept() {
+  public static Resource conceptMeeting() {
     return getResource(
       Map.of(
         NAME, List.of("Meeting Concept name"),
@@ -800,6 +800,20 @@ public class TestUtil {
       Set.of(CONCEPT, MEETING),
       emptyMap()
     ).setLabel("local value");
+  }
+
+  public static Resource conceptTemporal() {
+    return getResource(
+      Map.of(
+        NAME, List.of("Temporal Concept name"),
+        FORM_SUBDIVISION, List.of("Temporal Concept form subdivision"),
+        GENERAL_SUBDIVISION, List.of("Temporal Concept general subdivision"),
+        CHRONOLOGICAL_SUBDIVISION, List.of("Temporal Concept chronological subdivision"),
+        GEOGRAPHIC_SUBDIVISION, List.of("Temporal Concept geographic subdivision")
+      ),
+      Set.of(CONCEPT, TEMPORAL),
+      emptyMap()
+    ).setLabel("Temporal Concept name");
   }
 
   public static Resource id_lccn() {
