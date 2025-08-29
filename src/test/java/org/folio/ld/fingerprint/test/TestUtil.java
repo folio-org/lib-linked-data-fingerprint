@@ -16,6 +16,7 @@ import static org.folio.ld.dictionary.PredicateDictionary.GENRE;
 import static org.folio.ld.dictionary.PredicateDictionary.GOVERNMENT_PUBLICATION;
 import static org.folio.ld.dictionary.PredicateDictionary.GRANTING_INSTITUTION;
 import static org.folio.ld.dictionary.PredicateDictionary.INSTANTIATES;
+import static org.folio.ld.dictionary.PredicateDictionary.IS_PART_OF;
 import static org.folio.ld.dictionary.PredicateDictionary.LANGUAGE;
 import static org.folio.ld.dictionary.PredicateDictionary.MAP;
 import static org.folio.ld.dictionary.PredicateDictionary.MEDIA;
@@ -68,6 +69,7 @@ import static org.folio.ld.dictionary.PropertyDictionary.GEOGRAPHIC_SUBDIVISION;
 import static org.folio.ld.dictionary.PropertyDictionary.GOVERNING_ACCESS_NOTE;
 import static org.folio.ld.dictionary.PropertyDictionary.INFORMATION_ABOUT_DOCUMENTATION;
 import static org.folio.ld.dictionary.PropertyDictionary.INFORMATION_RELATING_TO_COPYRIGHT_STATUS;
+import static org.folio.ld.dictionary.PropertyDictionary.ISSN;
 import static org.folio.ld.dictionary.PropertyDictionary.ISSUANCE;
 import static org.folio.ld.dictionary.PropertyDictionary.ISSUANCE_NOTE;
 import static org.folio.ld.dictionary.PropertyDictionary.ISSUING_BODY;
@@ -116,6 +118,7 @@ import static org.folio.ld.dictionary.PropertyDictionary.TITLES;
 import static org.folio.ld.dictionary.PropertyDictionary.TRANSCRIBING_AGENCY;
 import static org.folio.ld.dictionary.PropertyDictionary.TYPE_OF_REPORT;
 import static org.folio.ld.dictionary.PropertyDictionary.VARIANT_TYPE;
+import static org.folio.ld.dictionary.PropertyDictionary.VOLUME;
 import static org.folio.ld.dictionary.PropertyDictionary.WITH_NOTE;
 import static org.folio.ld.dictionary.ResourceTypeDictionary.ANNOTATION;
 import static org.folio.ld.dictionary.ResourceTypeDictionary.BOOKS;
@@ -752,6 +755,41 @@ public class TestUtil {
       Set.of(ResourceTypeDictionary.TITLE),
       emptyMap()
     ).setLabel("Instance: mainTitle");
+  }
+
+  public static Resource work_series() {
+    var series = series();
+
+    return getResource(Map.of(
+        NAME, List.of("Series name"),
+        VOLUME, List.of("Series name")
+      ),
+      Set.of(ResourceTypeDictionary.WORK, ResourceTypeDictionary.SERIES),
+      Map.of(IS_PART_OF, List.of(series))
+    ).setLabel("Instance: mainTitle");
+  }
+
+  public static Resource series() {
+    var issn = id_issn();
+
+    return getResource(Map.of(
+        NAME, List.of("Series name"),
+        ISSN, List.of("ISSN value"),
+        LABEL, List.of("Series name")
+      ),
+      Set.of(ResourceTypeDictionary.SERIES),
+      Map.of(MAP, List.of(issn))
+    ).setLabel("Instance: mainTitle");
+  }
+
+  public static Resource id_issn() {
+    return getResource(
+      Map.of(
+        NAME, List.of("ISSN value")
+      ),
+      Set.of(IDENTIFIER, ResourceTypeDictionary.ID_ISSN),
+      emptyMap()
+    ).setLabel("ISSN value");
   }
 
   public static Resource titleParallel() {

@@ -15,6 +15,7 @@ import static org.folio.ld.fingerprint.test.TestUtil.dissertation;
 import static org.folio.ld.fingerprint.test.TestUtil.extent;
 import static org.folio.ld.fingerprint.test.TestUtil.id_ian;
 import static org.folio.ld.fingerprint.test.TestUtil.id_isbn;
+import static org.folio.ld.fingerprint.test.TestUtil.id_issn;
 import static org.folio.ld.fingerprint.test.TestUtil.id_lccn;
 import static org.folio.ld.fingerprint.test.TestUtil.id_unknown;
 import static org.folio.ld.fingerprint.test.TestUtil.instance;
@@ -22,11 +23,13 @@ import static org.folio.ld.fingerprint.test.TestUtil.languageCategory;
 import static org.folio.ld.fingerprint.test.TestUtil.loadResourceAsString;
 import static org.folio.ld.fingerprint.test.TestUtil.providerEvent;
 import static org.folio.ld.fingerprint.test.TestUtil.providerPlace;
+import static org.folio.ld.fingerprint.test.TestUtil.series;
 import static org.folio.ld.fingerprint.test.TestUtil.status;
 import static org.folio.ld.fingerprint.test.TestUtil.title;
 import static org.folio.ld.fingerprint.test.TestUtil.titleParallel;
 import static org.folio.ld.fingerprint.test.TestUtil.titleVariant;
 import static org.folio.ld.fingerprint.test.TestUtil.work;
+import static org.folio.ld.fingerprint.test.TestUtil.work_series;
 
 import java.util.stream.Stream;
 import org.folio.ld.dictionary.model.Resource;
@@ -59,18 +62,21 @@ class FingerprintServiceIT {
       Arguments.of(extent(), "extent.json"),
       Arguments.of(id_ian(), "id_ian.json"),
       Arguments.of(id_isbn(), "id_isbn.json"),
+      Arguments.of(id_issn(), "id_issn.json"),
       Arguments.of(id_lccn(), "id_lccn.json"),
       Arguments.of(id_unknown(), "id_unknown.json"),
       Arguments.of(instance(), "instance.json"),
       Arguments.of(languageCategory(), "languageCategory.json"),
       Arguments.of(providerEvent("providerEvent"), "providerEvent.json"),
       Arguments.of(providerPlace("providerEvent"), "providerPlace.json"),
+      Arguments.of(series(), "series.json"),
       Arguments.of(status("some"), "status.json"),
       Arguments.of(title(), "instanceTitle.json"),
       Arguments.of(titleParallel(), "parallelTitle.json"),
       Arguments.of(titleVariant(), "variantTitle.json"),
       Arguments.of(work(BOOKS), "work_book.json"),
-      Arguments.of(work(CONTINUING_RESOURCES), "work_serial.json")
+      Arguments.of(work(CONTINUING_RESOURCES), "work_continuing_resources.json"),
+      Arguments.of(work_series(), "work_series.json")
     );
   }
 
