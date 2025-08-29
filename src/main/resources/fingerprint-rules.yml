@@ -283,20 +283,18 @@ rules:
     properties:
       - NAME
       - VOLUME
+    edges:
+      - predicate: IS_PART_OF
+        edgeProperties:
+          ISSN: http://bibfra.me/vocab/marc/issn
   - types: SERIES
     properties:
       - NAME
-    edges:
-      - predicate: MAP
-        edgeProperties:
-          NAME: http://bibfra.me/vocab/marc/issn
+      - ISSN
   - types: INSTANCE, SERIES
     properties:
       - NAME
-    edges:
-      - predicate: MAP
-        edgeProperties:
-          NAME: http://bibfra.me/vocab/marc/issn
+      - ISSN
   - types: ANNOTATION
     properties:
       - CONTROL_NUMBER
