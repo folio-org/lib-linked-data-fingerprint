@@ -24,15 +24,15 @@ rules:
       - predicate: MAP
         types: ID_ISBN, IDENTIFIER
         edgeProperties:
-          NAME: http://bibfra.me/vocab/marc/isbn
+          NAME: http://bibfra.me/vocab/library/isbn
       - predicate: MAP
         types: ID_LCCN, IDENTIFIER
         edgeProperties:
-          NAME: http://bibfra.me/vocab/marc/lccn
+          NAME: http://bibfra.me/vocab/library/lccn
       - predicate: TITLE
         types: TITLE
         edgeProperties:
-          MAIN_TITLE: http://bibfra.me/vocab/marc/mainHeading
+          MAIN_TITLE: http://bibfra.me/vocab/library/mainHeading
   - types: CATEGORY
     properties:
       - TERM
@@ -51,7 +51,7 @@ rules:
     edges:
       - predicate: GRANTING_INSTITUTION
         edgeProperties:
-          NAME: http://bibfra.me/vocab/marc/grantingInstitution
+          NAME: http://bibfra.me/vocab/library/grantingInstitution
   - types: ID_LCCN, IDENTIFIER
     properties:
       - NAME
@@ -286,7 +286,7 @@ rules:
     edges:
       - predicate: IS_PART_OF
         edgeProperties:
-          ISSN: http://bibfra.me/vocab/marc/issn
+          ISSN: http://bibfra.me/vocab/library/issn
   - types: SERIES
     properties:
       - NAME
