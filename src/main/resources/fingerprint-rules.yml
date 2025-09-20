@@ -307,3 +307,6 @@ rules:
       - predicate: CATALOGING_LANGUAGE
         edgeProperties:
           CODE: http://bibfra.me/vocab/lite/catalogingLanguage
+  - types: HUB
+    properties:
+      - LINK
