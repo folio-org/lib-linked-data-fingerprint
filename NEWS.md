@@ -9,6 +9,7 @@
 - Update the fingerprint rules for ID_UNKNOWN and ID_IAN [MODLD-845](https://folio-org.atlassian.net/browse/MODLD-845)
 - Update the fingerprint rules for CONCEPT, TEMPORAL [MODLD-534](https://folio-org.atlassian.net/browse/MODLD-534)
 - Update IRIs with 'marc' to use 'library' instead [MODLD-792](https://folio-org.atlassian.net/browse/MODLD-792)
+- Introduce Hub fingerprinting [MODLD-870](https://folio-org.atlassian.net/browse/MODLD-870)
 
 ## 1.0.1 (03-12-2025)
 - Initial release
