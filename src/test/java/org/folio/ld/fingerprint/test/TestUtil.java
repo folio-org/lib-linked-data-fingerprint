@@ -152,7 +152,6 @@ import static org.folio.ld.dictionary.ResourceTypeDictionary.VARIANT_TITLE;
 import static org.folio.ld.dictionary.ResourceTypeDictionary.WORK;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.nio.charset.StandardCharsets;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -171,13 +170,13 @@ import org.folio.ld.dictionary.ResourceTypeDictionary;
 import org.folio.ld.dictionary.model.FolioMetadata;
 import org.folio.ld.dictionary.model.Resource;
 import org.folio.ld.dictionary.model.ResourceEdge;
-import org.folio.ld.fingerprint.config.FingerprintObjectMapperBackupConfig;
+import org.folio.ld.fingerprint.config.FingerprintObjectMapper;
 import org.springframework.core.io.ResourceLoader;
 
 @UtilityClass
 public class TestUtil {
 
-  public static final ObjectMapper OBJECT_MAPPER = new FingerprintObjectMapperBackupConfig().objectMapper();
+  public static final FingerprintObjectMapper OBJECT_MAPPER = new FingerprintObjectMapper();
 
   @SneakyThrows
   public static String loadResourceAsString(String resourceName) {
