@@ -58,7 +58,7 @@ public class FingerprintServiceImpl implements FingerprintService {
 
   private List<FingerprintEntry> getFingerprint(Resource resource, FingerprintRule rule) {
     if (isNull(rule)) {
-      log.info("No rule is defined for resource type [{}], fingerprinting all properties and no edges",
+      log.debug("No rule is defined for resource type [{}], fingerprinting all properties and no edges",
         resource.getTypes());
     }
     var fingerprint = new ArrayList<>(collectTypes(resource));
