@@ -310,3 +310,6 @@ rules:
   - types: HUB
     properties:
       - LABEL
+    edges:
+      - predicate: CREATOR
+        label: true
