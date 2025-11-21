@@ -313,3 +313,10 @@ rules:
     edges:
       - predicate: CREATOR
         label: true
+  - types: CONCEPT, HUB
+    properties:
+      - NAME
+      - FORM_SUBDIVISION
+      - GENERAL_SUBDIVISION
+      - CHRONOLOGICAL_SUBDIVISION
+      - GEOGRAPHIC_SUBDIVISION
