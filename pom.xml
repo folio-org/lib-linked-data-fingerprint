@@ -31,7 +31,7 @@
 
     <commons-io.version>2.21.0</commons-io.version>
     <lib-linked-data-dictionary.version>2.0.0-SNAPSHOT</lib-linked-data-dictionary.version>
-    <checkstyle.version>12.2.0</checkstyle.version>
+    <checkstyle.version>12.3.0</checkstyle.version>
 
     <versions-maven-plugin.version>2.20.1</versions-maven-plugin.version>
     <maven-source-plugin.version>3.4.0</maven-source-plugin.version>
