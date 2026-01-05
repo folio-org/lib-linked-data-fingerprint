@@ -78,7 +78,6 @@ import static org.folio.ld.dictionary.PropertyDictionary.LABEL;
 import static org.folio.ld.dictionary.PropertyDictionary.LCNAF_ID;
 import static org.folio.ld.dictionary.PropertyDictionary.LINK;
 import static org.folio.ld.dictionary.PropertyDictionary.LINKAGE;
-import static org.folio.ld.dictionary.PropertyDictionary.LOCAL_ID_VALUE;
 import static org.folio.ld.dictionary.PropertyDictionary.LOCATION_OF_EVENT;
 import static org.folio.ld.dictionary.PropertyDictionary.LOCATION_OF_ORIGINALS_DUPLICATES;
 import static org.folio.ld.dictionary.PropertyDictionary.LOCATION_OF_OTHER_ARCHIVAL_MATERIAL;
@@ -262,7 +261,7 @@ public class TestUtil {
 
     var localId = getResource(
       Map.of(
-        LOCAL_ID_VALUE, List.of("19861509")
+        NAME, List.of("19861509")
       ),
       Set.of(IDENTIFIER, ID_LOCAL),
       Map.of(STATUS, List.of(status("current")))
@@ -270,7 +269,7 @@ public class TestUtil {
 
     var localIdCancelled = getResource(
       Map.of(
-        LOCAL_ID_VALUE, List.of("09151986")
+        NAME, List.of("09151986")
       ),
       Set.of(IDENTIFIER, ID_LOCAL),
       Map.of(STATUS, List.of(status("canceled or invalid")))
