@@ -52,6 +52,72 @@ rules:
       - predicate: GRANTING_INSTITUTION
         edgeProperties:
           NAME: http://bibfra.me/vocab/library/grantingInstitution
+  - types: ID_FAST, IDENTIFIER
+    properties:
+      - NAME
+    edges:
+      - predicate: STATUS
+        label: true
+  - types: ID_GND, IDENTIFIER
+    properties:
+      - NAME
+    edges:
+      - predicate: STATUS
+        label: true
+  - types: ID_LCCSH, IDENTIFIER
+    properties:
+      - NAME
+    edges:
+      - predicate: STATUS
+        label: true
+  - types: ID_LCDGT, IDENTIFIER
+    properties:
+      - NAME
+    edges:
+      - predicate: STATUS
+        label: true
+  - types: ID_LCGFT, IDENTIFIER
+    properties:
+      - NAME
+    edges:
+      - predicate: STATUS
+        label: true
+  - types: ID_LCMPT, IDENTIFIER
+    properties:
+      - NAME
+    edges:
+      - predicate: STATUS
+        label: true
+  - types: ID_LCNAF, IDENTIFIER
+    properties:
+      - NAME
+    edges:
+      - predicate: STATUS
+        label: true
+  - types: ID_LCSH, IDENTIFIER
+    properties:
+      - NAME
+    edges:
+      - predicate: STATUS
+        label: true
+  - types: ID_MESH, IDENTIFIER
+    properties:
+      - NAME
+    edges:
+      - predicate: STATUS
+        label: true
+  - types: ID_VIAF, IDENTIFIER
+    properties:
+      - NAME
+    edges:
+      - predicate: STATUS
+        label: true
+  - types: ID_WIKIID, IDENTIFIER
+    properties:
+      - NAME
+    edges:
+      - predicate: STATUS
+        label: true
   - types: ID_LCCN, IDENTIFIER
     properties:
       - NAME
@@ -81,6 +147,12 @@ rules:
     properties:
       - NAME
       - QUALIFIER
+    edges:
+      - predicate: STATUS
+        label: true
+  - types: ID_STRN, IDENTIFIER
+    properties:
+      - NAME
     edges:
       - predicate: STATUS
         label: true
