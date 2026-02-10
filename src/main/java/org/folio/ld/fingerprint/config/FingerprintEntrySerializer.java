@@ -1,11 +1,9 @@
 package org.folio.ld.fingerprint.config;
 
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.SerializerProvider;
-import com.fasterxml.jackson.databind.ser.std.StdSerializer;
-import java.io.IOException;
 import org.folio.ld.fingerprint.service.FingerprintServiceImpl.FingerprintEntry;
-
+import tools.jackson.core.JsonGenerator;
+import tools.jackson.databind.SerializationContext;
+import tools.jackson.databind.ser.std.StdSerializer;
 
 public class FingerprintEntrySerializer extends StdSerializer<FingerprintEntry> {
 
@@ -18,7 +16,7 @@ public class FingerprintEntrySerializer extends StdSerializer<FingerprintEntry> 
   }
 
   @Override
-  public void serialize(FingerprintEntry value, JsonGenerator gen, SerializerProvider provider) throws IOException {
+  public void serialize(FingerprintEntry value, JsonGenerator gen, SerializationContext provider) {
     gen.writeStartArray();
     gen.writeString(value.key());
     gen.writeString(value.value());

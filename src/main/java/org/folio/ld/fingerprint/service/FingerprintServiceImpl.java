@@ -6,8 +6,8 @@ import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 import static java.util.Optional.ofNullable;
 import static org.folio.ld.dictionary.PropertyDictionary.LABEL;
+import static org.folio.ld.fingerprint.JsonUtil.getJsonMapper;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -19,10 +19,11 @@ import org.folio.ld.dictionary.PropertyDictionary;
 import org.folio.ld.dictionary.ResourceTypeDictionary;
 import org.folio.ld.dictionary.model.Resource;
 import org.folio.ld.dictionary.model.ResourceEdge;
-import org.folio.ld.fingerprint.config.FingerprintObjectMapper;
 import org.folio.ld.fingerprint.config.FingerprintRules;
 import org.folio.ld.fingerprint.config.FingerprintRules.FingerprintRule;
 import org.springframework.stereotype.Service;
+import tools.jackson.core.type.TypeReference;
+import tools.jackson.databind.json.JsonMapper;
 
 @Log4j2
 @Service
@@ -30,7 +31,7 @@ import org.springframework.stereotype.Service;
 public class FingerprintServiceImpl implements FingerprintService {
   private static final String TYPE_URI = "http://bibfra.me/purl/versa/type";
   private final FingerprintRules rules;
-  private final FingerprintObjectMapper mapper;
+  private final JsonMapper mapper = getJsonMapper();
 
   @SneakyThrows
   @Override
