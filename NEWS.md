@@ -1,6 +1,6 @@
 ## v2.0.0 (IN PROGRESS)
 
-## v1.9.9 (12-02-2026)
+## v1.9.9 (13-02-2026)
 - Add fingerprint rule for EXTENT resource [MODLD-390](https://folio-org.atlassian.net/browse/MODLD-390)
 - Mapping for MARC field 490 [MODLD-714](https://folio-org.atlassian.net/browse/MODLD-714)
 - "targetAudience", "geographicCoverage" links contain https instead of http [MODLD-695](https://folio-org.atlassian.net/browse/MODLD-695)
