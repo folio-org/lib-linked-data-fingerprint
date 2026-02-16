@@ -149,8 +149,8 @@ import static org.folio.ld.dictionary.ResourceTypeDictionary.TEMPORAL;
 import static org.folio.ld.dictionary.ResourceTypeDictionary.TOPIC;
 import static org.folio.ld.dictionary.ResourceTypeDictionary.VARIANT_TITLE;
 import static org.folio.ld.dictionary.ResourceTypeDictionary.WORK;
+import static org.folio.ld.fingerprint.JsonUtil.getJsonMapper;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import java.nio.charset.StandardCharsets;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -169,13 +169,14 @@ import org.folio.ld.dictionary.ResourceTypeDictionary;
 import org.folio.ld.dictionary.model.FolioMetadata;
 import org.folio.ld.dictionary.model.Resource;
 import org.folio.ld.dictionary.model.ResourceEdge;
-import org.folio.ld.fingerprint.config.FingerprintObjectMapper;
 import org.springframework.core.io.ResourceLoader;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.json.JsonMapper;
 
 @UtilityClass
 public class TestUtil {
 
-  public static final FingerprintObjectMapper OBJECT_MAPPER = new FingerprintObjectMapper();
+  public static final JsonMapper JSON_MAPPER = getJsonMapper();
 
   @SneakyThrows
   public static String loadResourceAsString(String resourceName) {
@@ -1024,7 +1025,7 @@ public class TestUtil {
   }
 
   private static JsonNode getJsonNode(Map<String, ?> map) {
-    return OBJECT_MAPPER.convertValue(map, JsonNode.class);
+    return JSON_MAPPER.convertValue(map, JsonNode.class);
   }
 
 }
