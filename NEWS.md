@@ -1,4 +1,6 @@
-## 2.0.0 (IN PROGRESS)
+## v2.0.0 (IN PROGRESS)
+
+## v1.9.9 (13-02-2026)
 - Add fingerprint rule for EXTENT resource [MODLD-390](https://folio-org.atlassian.net/browse/MODLD-390)
 - Mapping for MARC field 490 [MODLD-714](https://folio-org.atlassian.net/browse/MODLD-714)
 - "targetAudience", "geographicCoverage" links contain https instead of http [MODLD-695](https://folio-org.atlassian.net/browse/MODLD-695)
@@ -13,5 +15,5 @@
 - Update the fingerprint rule of ID_LOCAL to use NAME property & STATUS edge. [MODLD-939](https://folio-org.atlassian.net/browse/MODLD-939)
 - Add fingerprint rules for ID_LCCSH, ID_LCDGT, ID_LCGFT, ID_LCMPT, ID_LCNAF, ID_LCSH, ID_MESH, ID_VIAF, ID_WIKIID [MODLD-939](https://folio-org.atlassian.net/browse/MODLD-939)
 
-## 1.0.1 (03-12-2025)
+## v1.0.1 (03-12-2025)
 - Initial release
