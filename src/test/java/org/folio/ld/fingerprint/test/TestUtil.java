@@ -138,12 +138,14 @@ import static org.folio.ld.dictionary.ResourceTypeDictionary.ID_UNKNOWN;
 import static org.folio.ld.dictionary.ResourceTypeDictionary.INSTANCE;
 import static org.folio.ld.dictionary.ResourceTypeDictionary.JURISDICTION;
 import static org.folio.ld.dictionary.ResourceTypeDictionary.LANGUAGE_CATEGORY;
+import static org.folio.ld.dictionary.ResourceTypeDictionary.LIGHT_RESOURCE;
 import static org.folio.ld.dictionary.ResourceTypeDictionary.MEETING;
 import static org.folio.ld.dictionary.ResourceTypeDictionary.ORGANIZATION;
 import static org.folio.ld.dictionary.ResourceTypeDictionary.PARALLEL_TITLE;
 import static org.folio.ld.dictionary.ResourceTypeDictionary.PERSON;
 import static org.folio.ld.dictionary.ResourceTypeDictionary.PLACE;
 import static org.folio.ld.dictionary.ResourceTypeDictionary.PROVIDER_EVENT;
+import static org.folio.ld.dictionary.ResourceTypeDictionary.SERIES;
 import static org.folio.ld.dictionary.ResourceTypeDictionary.SUPPLEMENTARY_CONTENT;
 import static org.folio.ld.dictionary.ResourceTypeDictionary.TEMPORAL;
 import static org.folio.ld.dictionary.ResourceTypeDictionary.TOPIC;
@@ -188,11 +190,12 @@ public class TestUtil {
   public static Resource instance() {
     var instanceTitle2 = getResource(
       Map.of(
-        MAIN_TITLE, List.of("Instance Title empty")
+        MAIN_TITLE, List.of("Instance Title"),
+        SUBTITLE, List.of("Instance Sub title")
       ),
       Set.of(ResourceTypeDictionary.TITLE),
       emptyMap()
-    ).setLabel("Instance Title empty");
+    ).setLabel("Instance main Title sub title");
 
     var instanceTitle3 = getResource(
       Map.of(
@@ -763,7 +766,7 @@ public class TestUtil {
         NAME, List.of("Series name"),
         VOLUME, List.of("Series name")
       ),
-      Set.of(ResourceTypeDictionary.WORK, ResourceTypeDictionary.SERIES),
+      Set.of(WORK, SERIES, LIGHT_RESOURCE),
       Map.of(IS_PART_OF, List.of(series))
     ).setLabel("Instance: mainTitle");
   }
@@ -776,7 +779,7 @@ public class TestUtil {
         ISSN, List.of("ISSN value"),
         LABEL, List.of("Series name")
       ),
-      Set.of(ResourceTypeDictionary.SERIES),
+      Set.of(SERIES),
       Map.of(MAP, List.of(issn))
     ).setLabel("Instance: mainTitle");
   }
