@@ -13,6 +13,7 @@ rules:
         edgeProperties:
           CODE: http://bibfra.me/vocab/lite/language
   - types: INSTANCE
+    partialTypesMatch: true
     label: true
     properties:
       - STATEMENT_OF_RESPONSIBILITY
@@ -31,8 +32,7 @@ rules:
           NAME: http://bibfra.me/vocab/library/lccn
       - predicate: TITLE
         types: TITLE
-        edgeProperties:
-          MAIN_TITLE: http://bibfra.me/vocab/library/mainHeading
+        label: true
   - types: CATEGORY
     properties:
       - TERM
@@ -354,7 +354,7 @@ rules:
     properties:
       - LABEL
       - MATERIALS_SPECIFIED
-  - types: WORK, SERIES
+  - types: WORK, SERIES, LIGHT_RESOURCE
     properties:
       - NAME
       - VOLUME
@@ -366,7 +366,7 @@ rules:
     properties:
       - NAME
       - ISSN
-  - types: INSTANCE, SERIES
+  - types: INSTANCE, SERIES, LIGHT_RESOURCE
     properties:
       - NAME
       - ISSN
