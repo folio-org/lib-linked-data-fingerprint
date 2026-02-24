@@ -1,4 +1,5 @@
 ## v2.0.0 (IN PROGRESS)
+- Update the fingerprint property for CONCEPT and HUB resources to use the LABEL property [MODLD-1000](https://folio-org.atlassian.net/browse/MODLD-1000)
 
 ## v1.9.9 (13-02-2026)
 - Add fingerprint rule for EXTENT resource [MODLD-390](https://folio-org.atlassian.net/browse/MODLD-390)
