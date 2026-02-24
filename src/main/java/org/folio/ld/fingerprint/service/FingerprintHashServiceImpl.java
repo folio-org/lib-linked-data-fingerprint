@@ -13,6 +13,11 @@ public class FingerprintHashServiceImpl implements FingerprintHashService {
 
   @Override
   public Long hash(Resource resource) {
-    return HashUtils.hash(fingerprintService.fingerprint(resource));
+    return hash(resource, false);
+  }
+
+  @Override
+  public Long hash(Resource resource, boolean failIfNoConfiguredFingerprintData) {
+    return HashUtils.hash(fingerprintService.fingerprint(resource, failIfNoConfiguredFingerprintData));
   }
 }

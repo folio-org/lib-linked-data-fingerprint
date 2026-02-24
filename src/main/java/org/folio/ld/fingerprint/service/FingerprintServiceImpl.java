@@ -36,9 +36,16 @@ public class FingerprintServiceImpl implements FingerprintService {
   @SneakyThrows
   @Override
   public String fingerprint(Resource resource) {
+    return fingerprint(resource, false);
+  }
+
+  @SneakyThrows
+  @Override
+  public String fingerprint(Resource resource, boolean failIfNoConfiguredFingerprintData) {
     var matchedRule = getExactMatchRule(resource)
       .or(() -> getPartialMatchRule(resource));
-    var fingerprintMap = getFingerprint(resource, matchedRule.orElse(null));
+    var matchedRuleOrNull = matchedRule.orElse(null);
+    var fingerprintMap = getFingerprint(resource, matchedRuleOrNull, failIfNoConfiguredFingerprintData);
     return mapper.writeValueAsString(fingerprintMap);
   }
 
@@ -57,15 +64,26 @@ public class FingerprintServiceImpl implements FingerprintService {
       .findFirst();
   }
 
-  private List<FingerprintEntry> getFingerprint(Resource resource, FingerprintRule rule) {
+  private List<FingerprintEntry> getFingerprint(Resource resource, FingerprintRule rule,
+                                                boolean failIfNoConfiguredFingerprintData) {
     if (isNull(rule)) {
       log.debug("No rule is defined for resource type [{}], fingerprinting all properties and no edges",
         resource.getTypes());
     }
-    var fingerprint = new ArrayList<>(collectTypes(resource));
+    var typeEntries = collectTypes(resource);
+    var fingerprint = new ArrayList<>(typeEntries);
     ofNullable(rule).flatMap(r -> collectLabel(resource, r.label())).ifPresent(fingerprint::add);
     fingerprint.addAll(collectProperties(resource, rule));
     fingerprint.addAll(collectEdges(resource, rule));
+
+    if (fingerprint.isEmpty()) {
+      throw new FingerprintDataMissingException("Fingerprint cannot be empty for resource: " + resource);
+    }
+
+    if (failIfNoConfiguredFingerprintData && fingerprint.size() == typeEntries.size()) {
+      throw new FingerprintDataMissingException("No configured fingerprint properties found for resource: " + resource);
+    }
+
     return fingerprint.stream()
       .sorted(comparing(FingerprintEntry::key).thenComparing(FingerprintEntry::value))
       .toList();

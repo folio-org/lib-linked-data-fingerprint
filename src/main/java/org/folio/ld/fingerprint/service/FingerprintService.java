@@ -6,4 +6,5 @@ public interface FingerprintService {
 
   String fingerprint(Resource resource);
 
+  String fingerprint(Resource resource, boolean failIfNoConfiguredFingerprintData);
 }

@@ -1,8 +1,11 @@
 package org.folio.ld.fingerprint;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+import static org.folio.ld.dictionary.PropertyDictionary.NAME;
 import static org.folio.ld.dictionary.ResourceTypeDictionary.BOOKS;
 import static org.folio.ld.dictionary.ResourceTypeDictionary.CONTINUING_RESOURCES;
+import static org.folio.ld.dictionary.ResourceTypeDictionary.HUB;
 import static org.folio.ld.fingerprint.test.TestUtil.adminMetadataAnnotation;
 import static org.folio.ld.fingerprint.test.TestUtil.annotation;
 import static org.folio.ld.fingerprint.test.TestUtil.category;
@@ -13,6 +16,7 @@ import static org.folio.ld.fingerprint.test.TestUtil.conceptMeeting;
 import static org.folio.ld.fingerprint.test.TestUtil.conceptTemporal;
 import static org.folio.ld.fingerprint.test.TestUtil.dissertation;
 import static org.folio.ld.fingerprint.test.TestUtil.extent;
+import static org.folio.ld.fingerprint.test.TestUtil.getResource;
 import static org.folio.ld.fingerprint.test.TestUtil.id_ian;
 import static org.folio.ld.fingerprint.test.TestUtil.id_isbn;
 import static org.folio.ld.fingerprint.test.TestUtil.id_issn;
@@ -31,10 +35,16 @@ import static org.folio.ld.fingerprint.test.TestUtil.titleVariant;
 import static org.folio.ld.fingerprint.test.TestUtil.work;
 import static org.folio.ld.fingerprint.test.TestUtil.work_series;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Stream;
 import org.folio.ld.dictionary.model.Resource;
+import org.folio.ld.fingerprint.service.FingerprintDataMissingException;
 import org.folio.ld.fingerprint.service.FingerprintServiceImpl;
 import org.folio.ld.fingerprint.test.SpringTestConfig;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -91,5 +101,54 @@ class FingerprintServiceIT {
 
     // then
     assertThat(fingerprint).isEqualTo(expected);
+  }
+
+  @Test
+  void shouldNotThrowByDefault_whenConfiguredFingerprintInputsAreMissing() {
+    var hubWithoutLabel = getResource(
+      Map.of(NAME, List.of("Clubb, Angela. Mad about muffins")),
+      Set.of(HUB),
+      Collections.emptyMap()
+    );
+
+    var fingerprint = fingerprintService.fingerprint(hubWithoutLabel);
+
+    assertThat(fingerprint).contains("versa/type");
+  }
+
+  @Test
+  void shouldThrowInStrictMode_whenConfiguredFingerprintInputsAreMissing() {
+    var hubWithoutLabel = getResource(
+      Map.of(NAME, List.of("Works of William Shapespeare")),
+      Set.of(HUB),
+      Collections.emptyMap()
+    );
+
+    assertThatThrownBy(() -> fingerprintService.fingerprint(hubWithoutLabel, true))
+      .isInstanceOf(FingerprintDataMissingException.class);
+  }
+
+  @Test
+  void shouldThrow_whenFingerprintIsEmpty_inDefaultMode() {
+    var emptyResource = getResource(
+      Collections.emptyMap(),
+      Collections.emptySet(),
+      Collections.emptyMap()
+    );
+
+    assertThatThrownBy(() -> fingerprintService.fingerprint(emptyResource))
+      .isInstanceOf(FingerprintDataMissingException.class);
+  }
+
+  @Test
+  void shouldThrow_whenFingerprintIsEmpty_inStrictMode() {
+    var emptyResource = getResource(
+      Collections.emptyMap(),
+      Collections.emptySet(),
+      Collections.emptyMap()
+    );
+
+    assertThatThrownBy(() -> fingerprintService.fingerprint(emptyResource, true))
+      .isInstanceOf(FingerprintDataMissingException.class);
   }
 }
