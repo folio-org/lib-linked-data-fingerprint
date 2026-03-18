@@ -11,10 +11,10 @@ import static org.folio.ld.dictionary.PredicateDictionary.CONTENT;
 import static org.folio.ld.dictionary.PredicateDictionary.CONTRIBUTOR;
 import static org.folio.ld.dictionary.PredicateDictionary.COPYRIGHT;
 import static org.folio.ld.dictionary.PredicateDictionary.CREATOR;
+import static org.folio.ld.dictionary.PredicateDictionary.DEGREE_GRANTING_INSTITUTION;
 import static org.folio.ld.dictionary.PredicateDictionary.FOCUS;
 import static org.folio.ld.dictionary.PredicateDictionary.GENRE;
 import static org.folio.ld.dictionary.PredicateDictionary.GOVERNMENT_PUBLICATION;
-import static org.folio.ld.dictionary.PredicateDictionary.GRANTING_INSTITUTION;
 import static org.folio.ld.dictionary.PredicateDictionary.INSTANTIATES;
 import static org.folio.ld.dictionary.PredicateDictionary.IS_PART_OF;
 import static org.folio.ld.dictionary.PredicateDictionary.LANGUAGE;
@@ -51,8 +51,6 @@ import static org.folio.ld.dictionary.PropertyDictionary.DEGREE;
 import static org.folio.ld.dictionary.PropertyDictionary.DESCRIPTION_SOURCE_NOTE;
 import static org.folio.ld.dictionary.PropertyDictionary.DIMENSIONS;
 import static org.folio.ld.dictionary.PropertyDictionary.DISSERTATION_ID;
-import static org.folio.ld.dictionary.PropertyDictionary.DISSERTATION_NOTE;
-import static org.folio.ld.dictionary.PropertyDictionary.DISSERTATION_YEAR;
 import static org.folio.ld.dictionary.PropertyDictionary.EDITION;
 import static org.folio.ld.dictionary.PropertyDictionary.EDITION_NUMBER;
 import static org.folio.ld.dictionary.PropertyDictionary.ENTITY_AND_ATTRIBUTE_INFORMATION;
@@ -965,14 +963,14 @@ public class TestUtil {
   public static Resource dissertation() {
     return getResource(
       Map.of(
-        LABEL, List.of("Dissertation label"),
+        NOTE, List.of("Dissertation label"),
         DEGREE, List.of("Dissertation degree"),
-        DISSERTATION_YEAR, List.of("Dissertation year"),
-        DISSERTATION_NOTE, List.of("Dissertation note"),
+        DATE, List.of("Dissertation year"),
+        MISC_INFO, List.of("Dissertation note"),
         DISSERTATION_ID, List.of("Dissertation ID")
       ),
       Set.of(DISSERTATION),
-      Map.of(GRANTING_INSTITUTION, List.of(organization("Dissertation granting institution")))
+      Map.of(DEGREE_GRANTING_INSTITUTION, List.of(organization("Dissertation granting institution")))
     ).setLabel("Dissertation label");
   }
 

@@ -43,15 +43,15 @@ rules:
         label: true
   - types: DISSERTATION
     properties:
-      - LABEL
+      - NOTE
       - DEGREE
-      - DISSERTATION_YEAR
-      - DISSERTATION_NOTE
+      - DATE
+      - MISC_INFO
       - DISSERTATION_ID
     edges:
-      - predicate: GRANTING_INSTITUTION
+      - predicate: DEGREE_GRANTING_INSTITUTION
         edgeProperties:
-          NAME: http://bibfra.me/vocab/library/grantingInstitution
+          NAME: http://bibfra.me/vocab/relation/degreeGrantingInstitution
   - types: ID_FAST, IDENTIFIER
     properties:
       - NAME
