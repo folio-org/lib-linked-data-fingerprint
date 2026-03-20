@@ -16,6 +16,7 @@ rules:
     partialTypesMatch: true
     label: true
     properties:
+      - EDITION
       - STATEMENT_OF_RESPONSIBILITY
     edges:
       - predicate: CREATOR
@@ -26,10 +27,14 @@ rules:
         types: ID_ISBN, IDENTIFIER
         edgeProperties:
           NAME: http://bibfra.me/vocab/library/isbn
+          QUALIFIER: http://bibfra.me/vocab/library/qualifier
       - predicate: MAP
         types: ID_LCCN, IDENTIFIER
         edgeProperties:
           NAME: http://bibfra.me/vocab/library/lccn
+      - predicate: PE_PUBLICATION
+        types: PROVIDER_EVENT
+        label: true
       - predicate: TITLE
         types: TITLE
         label: true
