@@ -43,6 +43,7 @@ rules:
       - TERM
       - CODE
       - LINK
+      - SOURCE
     edges:
       - predicate: IS_DEFINED_BY
         label: true
