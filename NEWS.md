@@ -1,4 +1,4 @@
-## v2.0.0 (IN PROGRESS)
+## v2.0.0 (17-04-2026)
 - Update the fingerprint property for CONCEPT and HUB resources to use the LABEL property [MODLD-1000](https://folio-org.atlassian.net/browse/MODLD-1000)
 - Update fingerprint rules for DISSERTATION resource [MODLD-1014](https://folio-org.atlassian.net/browse/MODLD-1014)
 - Update fingerprint rules for INSTANCE resource [MODLD-1016](https://folio-org.atlassian.net/browse/MODLD-1016)
