@@ -1,4 +1,5 @@
 ## v3.0.0 (IN PROGRESS)
+- Base64UrlLegacy method introduced [MODLD-1087](https://folio-org.atlassian.net/browse/MODLD-1087)
 
 ## v2.0.0 (17-04-2026)
 - Update the fingerprint property for CONCEPT and HUB resources to use the LABEL property [MODLD-1000](https://folio-org.atlassian.net/browse/MODLD-1000)

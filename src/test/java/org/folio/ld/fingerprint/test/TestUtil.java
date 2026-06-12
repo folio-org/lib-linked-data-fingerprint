@@ -553,6 +553,114 @@ public class TestUtil {
     ).setLabel("Work: label");
   }
 
+  public static Resource family() {
+    return getResource(
+      Map.of(
+        NAME, List.of("Family name"),
+        NUMERATION, List.of("Family numeration"),
+        TITLES, List.of("Family titles"),
+        DATE, List.of("Family date"),
+        MISC_INFO, List.of("Misc info"),
+        ATTRIBUTION, List.of("Attribution"),
+        NAME_ALTERNATIVE, List.of("Name alternative"),
+        AFFILIATION, List.of("Affiliation")
+      ),
+      Set.of(FAMILY),
+      emptyMap()
+    ).setLabel("Family name");
+  }
+
+  public static Resource form() {
+    return getResource(
+      Map.of(
+        NAME, List.of("agroturismo")
+      ),
+      Set.of(FORM),
+      emptyMap()
+    ).setLabel("agroturismo");
+  }
+
+  public static Resource jurisdiction() {
+    return getResource(
+      Map.of(
+        NAME, List.of("Alemanya."),
+        SUBORDINATE_UNIT, List.of("Heer.", "Infanteriedivision (1941-1943), 250"),
+        PropertyDictionary.PLACE, List.of("Place"),
+        MISC_INFO, List.of("Misc info")
+      ),
+      Set.of(JURISDICTION),
+      emptyMap()
+    ).setLabel("Alemanya.");
+  }
+
+  public static Resource meeting() {
+    return getResource(
+      Map.of(
+        NAME, List.of("2016 EATLP Congress ("),
+        DATE, List.of("2016."),
+        PropertyDictionary.PLACE, List.of("Munich"),
+        MISC_INFO, List.of("Misc info")
+      ),
+      Set.of(MEETING),
+      emptyMap()
+    ).setLabel("");
+  }
+
+  public static Resource person() {
+    return getResource(
+      Map.of(
+        NAME, List.of("Pedro I"),
+        NUMERATION, List.of("1672-1725."),
+        TITLES, List.of("Emperador de Rusia")
+      ),
+      Set.of(PERSON),
+      emptyMap()
+    ).setLabel("Pedro I");
+  }
+
+  public static Resource place() {
+    return getResource(
+      Map.of(
+        NAME, List.of("Artestampa"),
+        MISC_INFO, List.of("Misc info")
+      ),
+      Set.of(PLACE),
+      emptyMap()
+    ).setLabel("Artestampa");
+  }
+
+  public static Resource temporal() {
+    return getResource(
+      Map.of(
+        NAME, List.of("1300-1335")
+      ),
+      Set.of(TEMPORAL),
+      emptyMap()
+    ).setLabel("1300-1335");
+  }
+
+  public static Resource topic() {
+    return getResource(
+      Map.of(
+        NAME, List.of("Aagricultura")
+      ),
+      Set.of(TOPIC),
+      emptyMap()
+    ).setLabel("Aagricultura");
+  }
+
+  public static Resource organization() {
+    return getResource(
+      Map.of(
+        NAME, List.of("ABBA (Grupo musical)"),
+        PropertyDictionary.PLACE, List.of("Place"),
+        MISC_INFO, List.of("Misc info")
+      ),
+      Set.of(ORGANIZATION),
+      emptyMap()
+    ).setLabel("");
+  }
+
   private static Resource organization(String name) {
     return getResource(
       Map.of(
