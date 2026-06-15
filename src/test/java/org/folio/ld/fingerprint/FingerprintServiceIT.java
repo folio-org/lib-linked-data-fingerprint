@@ -13,21 +13,30 @@ import static org.folio.ld.fingerprint.test.TestUtil.conceptMeeting;
 import static org.folio.ld.fingerprint.test.TestUtil.conceptTemporal;
 import static org.folio.ld.fingerprint.test.TestUtil.dissertation;
 import static org.folio.ld.fingerprint.test.TestUtil.extent;
+import static org.folio.ld.fingerprint.test.TestUtil.family;
+import static org.folio.ld.fingerprint.test.TestUtil.form;
 import static org.folio.ld.fingerprint.test.TestUtil.id_ian;
 import static org.folio.ld.fingerprint.test.TestUtil.id_isbn;
 import static org.folio.ld.fingerprint.test.TestUtil.id_issn;
 import static org.folio.ld.fingerprint.test.TestUtil.id_lccn;
 import static org.folio.ld.fingerprint.test.TestUtil.id_unknown;
 import static org.folio.ld.fingerprint.test.TestUtil.instance;
+import static org.folio.ld.fingerprint.test.TestUtil.jurisdiction;
 import static org.folio.ld.fingerprint.test.TestUtil.languageCategory;
 import static org.folio.ld.fingerprint.test.TestUtil.loadResourceAsString;
+import static org.folio.ld.fingerprint.test.TestUtil.meeting;
+import static org.folio.ld.fingerprint.test.TestUtil.organization;
+import static org.folio.ld.fingerprint.test.TestUtil.person;
+import static org.folio.ld.fingerprint.test.TestUtil.place;
 import static org.folio.ld.fingerprint.test.TestUtil.providerEvent;
 import static org.folio.ld.fingerprint.test.TestUtil.providerPlace;
 import static org.folio.ld.fingerprint.test.TestUtil.series;
 import static org.folio.ld.fingerprint.test.TestUtil.status;
+import static org.folio.ld.fingerprint.test.TestUtil.temporal;
 import static org.folio.ld.fingerprint.test.TestUtil.title;
 import static org.folio.ld.fingerprint.test.TestUtil.titleParallel;
 import static org.folio.ld.fingerprint.test.TestUtil.titleVariant;
+import static org.folio.ld.fingerprint.test.TestUtil.topic;
 import static org.folio.ld.fingerprint.test.TestUtil.work;
 import static org.folio.ld.fingerprint.test.TestUtil.work_series;
 
@@ -60,6 +69,15 @@ class FingerprintServiceIT {
       Arguments.of(conceptTemporal(), "temporalConcept.json"),
       Arguments.of(dissertation(), "dissertation.json"),
       Arguments.of(extent(), "extent.json"),
+      Arguments.of(family(), "family.json"),
+      Arguments.of(form(), "form.json"),
+      Arguments.of(jurisdiction(), "jurisdiction.json"),
+      Arguments.of(meeting(), "meeting.json"),
+      Arguments.of(organization(), "organization.json"),
+      Arguments.of(place(), "place.json"),
+      Arguments.of(person(), "person.json"),
+      Arguments.of(temporal(), "temporal.json"),
+      Arguments.of(topic(), "topic.json"),
       Arguments.of(id_ian(), "id_ian.json"),
       Arguments.of(id_isbn(), "id_isbn.json"),
       Arguments.of(id_issn(), "id_issn.json"),
@@ -80,6 +98,20 @@ class FingerprintServiceIT {
     );
   }
 
+  private static Stream<Arguments> provideResourceAndExpectedLegacyFingerprint() {
+    return Stream.of(
+      Arguments.of(family(), "familyLegacy.json"),
+      Arguments.of(form(), "form.json"),
+      Arguments.of(jurisdiction(), "jurisdictionLegacy.json"),
+      Arguments.of(meeting(), "meeting.json"),
+      Arguments.of(organization(), "organization.json"),
+      Arguments.of(person(), "personLegacy.json"),
+      Arguments.of(place(), "place.json"),
+      Arguments.of(temporal(), "temporal.json"),
+      Arguments.of(topic(), "topic.json")
+    );
+  }
+
   @ParameterizedTest
   @MethodSource("provideResourceAndExpectedFingerprint")
   void shouldReturnCorrectFingerprint_forGivenResource(Resource resource, String expectedJson) {
@@ -88,6 +120,19 @@ class FingerprintServiceIT {
 
     // when
     var fingerprint = fingerprintService.fingerprint(resource);
+
+    // then
+    assertThat(fingerprint).isEqualTo(expected);
+  }
+
+  @ParameterizedTest
+  @MethodSource("provideResourceAndExpectedLegacyFingerprint")
+  void shouldReturnCorrectLegacyFingerprint_forGivenResource(Resource resource, String expectedJson) {
+    // given
+    var expected = loadResourceAsString("fingerprints_expected/" + expectedJson);
+
+    // when
+    var fingerprint = fingerprintService.fingerprintLegacy(resource);
 
     // then
     assertThat(fingerprint).isEqualTo(expected);

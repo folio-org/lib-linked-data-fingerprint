@@ -9,6 +9,7 @@ import static org.folio.ld.dictionary.PropertyDictionary.LABEL;
 import static org.folio.ld.fingerprint.JsonUtil.getJsonMapper;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -21,6 +22,7 @@ import org.folio.ld.dictionary.model.Resource;
 import org.folio.ld.dictionary.model.ResourceEdge;
 import org.folio.ld.fingerprint.config.FingerprintRules;
 import org.folio.ld.fingerprint.config.FingerprintRules.FingerprintRule;
+import org.folio.ld.fingerprint.service.legacy.LegacyProperties;
 import org.springframework.stereotype.Service;
 import tools.jackson.core.type.TypeReference;
 import tools.jackson.databind.json.JsonMapper;
@@ -30,16 +32,33 @@ import tools.jackson.databind.json.JsonMapper;
 @RequiredArgsConstructor
 public class FingerprintServiceImpl implements FingerprintService {
   private static final String TYPE_URI = "http://bibfra.me/purl/versa/type";
+  private static final Comparator<FingerprintEntry> ENTRY_COMPARATOR =
+    comparing(FingerprintEntry::key).thenComparing(FingerprintEntry::value);
   private final FingerprintRules rules;
   private final JsonMapper mapper = getJsonMapper();
 
   @SneakyThrows
   @Override
   public String fingerprint(Resource resource) {
+    var fingerprints = getFingerprints(resource);
+    return mapper.writeValueAsString(fingerprints);
+  }
+
+  @Override
+  public String fingerprintLegacy(Resource resource) {
+    var fingerprints = getFingerprints(resource).stream()
+      .map(fe -> LegacyProperties.isLegacy(fe.key())
+        ? new FingerprintEntry(LegacyProperties.get(fe.key), fe.value())
+        : fe)
+      .sorted(ENTRY_COMPARATOR)
+      .toList();
+    return mapper.writeValueAsString(fingerprints);
+  }
+
+  private List<FingerprintEntry> getFingerprints(Resource resource) {
     var matchedRule = getExactMatchRule(resource)
       .or(() -> getPartialMatchRule(resource));
-    var fingerprintMap = getFingerprint(resource, matchedRule.orElse(null));
-    return mapper.writeValueAsString(fingerprintMap);
+    return getFingerprint(resource, matchedRule.orElse(null));
   }
 
   private Optional<FingerprintRule> getExactMatchRule(Resource resource) {
@@ -67,7 +86,7 @@ public class FingerprintServiceImpl implements FingerprintService {
     fingerprint.addAll(collectProperties(resource, rule));
     fingerprint.addAll(collectEdges(resource, rule));
     return fingerprint.stream()
-      .sorted(comparing(FingerprintEntry::key).thenComparing(FingerprintEntry::value))
+      .sorted(ENTRY_COMPARATOR)
       .toList();
   }
 

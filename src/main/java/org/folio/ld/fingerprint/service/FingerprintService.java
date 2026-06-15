@@ -6,4 +6,6 @@ public interface FingerprintService {
 
   String fingerprint(Resource resource);
 
+  String fingerprintLegacy(Resource resource);
+
 }

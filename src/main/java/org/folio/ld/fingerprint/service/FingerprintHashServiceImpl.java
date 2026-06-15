@@ -15,4 +15,11 @@ public class FingerprintHashServiceImpl implements FingerprintHashService {
   public Long hash(Resource resource) {
     return HashUtils.hash(fingerprintService.fingerprint(resource));
   }
+
+  @Override
+  public String base64UrlLegacy(Resource resource) {
+    var input = fingerprintService.fingerprintLegacy(resource);
+    return HashUtils.base64Url(input);
+  }
+
 }

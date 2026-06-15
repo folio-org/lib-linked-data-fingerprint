@@ -5,4 +5,6 @@ import org.folio.ld.dictionary.model.Resource;
 public interface FingerprintHashService {
 
   Long hash(Resource resource);
+
+  String base64UrlLegacy(Resource resource);
 }
